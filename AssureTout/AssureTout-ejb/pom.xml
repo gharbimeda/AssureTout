@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>tn.esprit.assuretout</groupId>
@@ -13,8 +14,18 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.highfaces</groupId>
+			<artifactId>highfaces</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.8.3</version>
 		</dependency>
 	</dependencies>
 
@@ -27,6 +38,17 @@
 				<version>${version.ejb.plugin}</version>
 				<configuration>
 					<ejbVersion>3.2</ejbVersion>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>1.0.2.Final</version>
+				<configuration>
+					<filename>${project.artifactId}.jar</filename>
+					<hostname>localhost</hostname>
+
+					<port>19990</port>
 				</configuration>
 			</plugin>
 		</plugins>

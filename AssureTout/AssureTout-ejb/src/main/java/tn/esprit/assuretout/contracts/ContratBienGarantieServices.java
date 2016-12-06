@@ -11,13 +11,13 @@ import tn.esprit.assuretout.entities.ContratBienGarantie;
 @Local
 public interface ContratBienGarantieServices {
 
-	public void addContratBienGarentie(ContratBienGarantie ContratBienGarantie);
+	public void addContratBienGarantie(ContratBienGarantie ContratBienGarantie);
 
-	public void deleteContratBienGarentie(ContratBienGarantie ContratBienGarantie);
+	public void deleteContratBienGarantie(ContratBienGarantie ContratBienGarantie);
 
 	public ContratBienGarantie findById(int id);
 
-	public void update(ContratBienGarantie ContratBienGarentie);
+	public void update(ContratBienGarantie ContratBienGarantie);
 
 	public List<ContratBienGarantie> findAll();
 
