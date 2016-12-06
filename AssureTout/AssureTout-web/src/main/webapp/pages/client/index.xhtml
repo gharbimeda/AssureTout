@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateClient/templateClient.xhtml">
+	<ui:define name="titleName"> Accueil </ui:define>
+	<ui:define name="sliderContent">
+		<div class="hero hero-slider">
+			<ul class="slides">
+				<li
+					data-bg-image="#{request.contextPath}/resources/client/dummy/maquette.PNG">
+					<div class="container">
+						<div class="slide-content">
+							<h2 class="slide-title">
+								Get your <strong>Life Insurance</strong>
+							</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+								Repellendus quos cumque odio soluta harum error sequi
+								laudantium, est nam perspiciatis eveniet maxime, esse possimus
+								architecto sunt natus reprehenderit debitis fugit.</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</ui:define>
+	<ui:define name="PageContent">
+		<div class="fullwidth-block greet-section">
+			<div class="container">
+				<h2 class="section-title">Bienvenue Chez Assure Tout</h2>
+				
+				<div class="row">
+					<div class="col-md-3">
+						<div class="feature">
+							<i class="icon-car"></i>
+							<h3 class="feature-title">Garantie Auto</h3>
+							<p> </p>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="feature">
+							<i class="icon-sofa"></i>
+							<h3 class="feature-title">Garantie Habitation</h3>
+							<p></p>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="feature">
+							<i class="icon-pool"></i>
+							<h3 class="feature-title">Garantie Prévoyance</h3>
+							<p></p>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="feature">
+							<i class="icon-nurse"></i>
+							<h3 class="feature-title">Garantie Santé</h3>
+							<p></p>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
