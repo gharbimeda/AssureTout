@@ -36,7 +36,7 @@ public class Client extends User implements Serializable {
 		super();
 	}
 
-	@NotNull
+
 	public String getAdresse() {
 		return adresse;
 	}
@@ -45,7 +45,7 @@ public class Client extends User implements Serializable {
 		this.adresse = adresse;
 	}
 
-	@NotNull
+
 	public String getSexe() {
 		return sexe;
 	}
@@ -99,7 +99,7 @@ public class Client extends User implements Serializable {
 		this.courtier = courtier;
 	}
 
-	@NotNull
+
 	public String getRegion() {
 		return region;
 	}

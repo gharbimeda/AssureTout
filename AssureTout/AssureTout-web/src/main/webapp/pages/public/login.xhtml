@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateClient/templateClient.xhtml">
+	<ui:define name="titleName"> Accueil </ui:define>
+	<ui:define name="PageContent">
+		<div class="fullwidth-block greet-section">
+			<div class="container">
+				<h2 class="section-title">Connectez vous</h2>
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:outputText value="Entrez votre identifiant " />
+						<p:inputText value="#{access.login}" />
+						<h:outputText value="Entrez votre mot de passe " />
+						<p:inputText value="#{access.password}"/>
+					</h:panelGrid>					
+					<p:commandButton action="#{access.doLogin()}" value="Connection"
+						ajax="false" class="btn btn-info" />
+
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
