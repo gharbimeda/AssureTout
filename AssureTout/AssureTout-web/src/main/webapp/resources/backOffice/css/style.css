@@ -1,4 +1,4 @@
-﻿
+
 /*=============================================================
     Authour URL: www.designbootstrap.com
     
@@ -128,7 +128,7 @@ header {
 
     .user-settings-wrapper .nav > li > a:hover,.user-settings-wrapper .nav > li > a:focus {
         text-decoration: none;
-        background-color: #6497B1!important;
+        background-color: #9BB1B9!important;
     }
 
     .user-settings-wrapper img {
@@ -169,7 +169,7 @@ header {
 }
 
 .menu-top-active {
-    background-color: #6497B1;
+    background-color: #9BB1B9;
 }
 
 .menu-section .nav > li > a:hover,.menu-section .nav > li > a:focus {
@@ -181,7 +181,7 @@ header {
 }
 
 .navbar-inverse {
-    background-color: #6497B1;
+    background-color: #9BB1B9;
     border-color: transparent;
 }
 
@@ -200,7 +200,7 @@ footer {
     padding: 10px;
     color: #fff;
     font-size: 12px;
-    background-color: #6497B1;
+    background-color: #9BB1B9;
 }
 
     footer a, footer a:hover {
