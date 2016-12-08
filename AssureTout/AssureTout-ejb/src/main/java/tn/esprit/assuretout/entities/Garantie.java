@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.transaction.Transactional;
 
 @Entity
 public class Garantie implements Serializable {
@@ -59,6 +60,7 @@ public class Garantie implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "garantie", fetch=FetchType.LAZY)
+	@Transactional
 	public List<GarantieSousGarantieNiveau> getGarantieSousGarantieNiveaux() {
 		return garantieSousGarantieNiveaux;
 	}
