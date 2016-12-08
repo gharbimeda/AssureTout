@@ -28,12 +28,14 @@ public class SinistreBean {
 	private Client client;
 
 	private List<String> images = new ArrayList<String>();
-	
-	private List<Sinistre> sinistres ;
-	
+
+	private List<Sinistre> sinistres;
+	private List<Sinistre> sinistresRedac;
+
 	@PostConstruct
 	public void init() {
 		sinistres = sinistreServices.findByClient(client);
+		sinistresRedac = sinistreServices.findAll();
 	}
 
 	public String submit() {
@@ -47,12 +49,13 @@ public class SinistreBean {
 		sinistreServices.addSinistre(sinistre);
 		return "/pages/client/index?faces-redirect=true";
 	}
-	
-	public String doContester(Sinistre sinistre){
+
+	public String doContester(Sinistre sinistre) {
 		sinistre.setEtat(Etat.CONTESTE);
 		sinistreServices.update(sinistre);
 		return "/pages/client/mesSinistre?faces-redirect=true";
 	}
+
 
 	public Sinistre getSinistre() {
 		return sinistre;
@@ -84,6 +87,14 @@ public class SinistreBean {
 
 	public void setSinistres(List<Sinistre> sinistres) {
 		this.sinistres = sinistres;
+	}
+
+	public List<Sinistre> getSinistresRedac() {
+		return sinistresRedac;
+	}
+
+	public void setSinistresRedac(List<Sinistre> sinistresRedac) {
+		this.sinistresRedac = sinistresRedac;
 	}
 
 }

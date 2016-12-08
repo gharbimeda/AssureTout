@@ -48,7 +48,7 @@ public class AccessBean {
 				Redacteur foundRedacteur = (Redacteur) auth.authUser(login, password);
 				identityBean.setUtilisateur(foundRedacteur);
 				identityBean.setRole("redacteur");
-				navigateTo = "/pages/Redacteur/dashbordRedacteur?faces-redirect=true";
+				navigateTo = "/pages/Redacteur/dashboardRedacteur?faces-redirect=true";
 			} else if (found instanceof Expert) {
 				Expert foundExpert = (Expert) auth.authUser(login, password);
 				identityBean.setUtilisateur(foundExpert);

@@ -12,4 +12,45 @@
 				sinistres</a></li>
 	</ui:define>
 	<ui:define name="PageContentName"> Gestion des sinistres </ui:define>
+	<ui:define name="PageContent">
+		<h:form>
+			<h:dataTable
+				styleClass="table table-striped table-bordered table-hover"
+				value="#{sinistreRedacBean.sinistresRedac}" var="d">
+
+				<h:column>
+					<f:facet name="header">Client</f:facet>
+					<h:outputText value="#{d.client.email}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Date</f:facet>
+					<h:outputText value="#{d.date}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Description</f:facet>
+					<h:outputText value="#{d.description}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Etat</f:facet>
+					<h:outputText
+						styleClass="#{d.etat=='ENCOURS' ? 'label label-warning' : d.etat=='TRAITE' ? 'label label-success' : 'label label-danger'}"
+						value="#{d.etat}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Montant Remboursement</f:facet>
+					<h:outputText value="#{d.tarif}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Refuser Sinistre</f:facet>
+
+					<h:commandButton styleClass="btn btn-primary btn-xs"
+						action="#{sinistreRedacBean.doRefuser()}" value="refuser"
+						disabled="#{d.etat=='ENCOURS' ? 'false' : 'true'}">
+
+					</h:commandButton>
+				</h:column>
+
+			</h:dataTable>
+		</h:form>
+	</ui:define>
 </ui:composition>
