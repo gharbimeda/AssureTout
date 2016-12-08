@@ -5,34 +5,34 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/templateBack/templateBack.xhtml">
-	<ui:define name="titleName"> Contrat </ui:define>
+	<ui:define name="titleName"> Devis </ui:define>
 	<ui:define name="Menu">
-		<li><a class="menu-top-active"
+		<li><a 
 			href="#{request.contextPath}/pages/Redacteur/gestionContrat.xhtml">Gestion
 				des Contrats</a></li>
-		<li><a
+		<li><a class="menu-top-active"
 			href="#{request.contextPath}/pages/Redacteur/gestionDevis.xhtml">Gestion
 				des devis</a></li>
 		<li><a
 			href="#{request.contextPath}/pages/Redacteur/dashboardRedacteur.xhtml">Gestion
 				des sinistres</a></li>
 	</ui:define>
-	<ui:define name="PageContentName"> Gestion des contrats</ui:define>
+	<ui:define name="PageContentName"> Gestion des devis </ui:define>
 	<ui:define name="PageContent">
 		<div class="panel panel-default">
-			<div class="panel-heading">Valider les contrats:</div>
+			<div class="panel-heading">Valider les devis:</div>
 			<div class="panel-body">
 				<h:form>
 					<h:dataTable
 						styleClass="table table-striped table-bordered table-hover"
-						value="#{redacteurBean.list}" var="d">
+						value="#{redacteurBean.listDevis}" var="d">
 
 						<h:column>
 							<f:facet name="header">Client</f:facet>
 							<h:outputText value="#{d.contrat.client.email}" />
 						</h:column>
 						<h:column>
-							<f:facet name="header">Prime du contrat</f:facet>
+							<f:facet name="header">Prime à Payer</f:facet>
 							<h:outputText value="#{d.contrat.prime}" />
 						</h:column>
 						<h:column>
@@ -58,7 +58,7 @@
 							</h:commandButton>
 						</h:column>
 						<h:column>
-							<f:facet name="header">Valider le contrat</f:facet>
+							<f:facet name="header">Valider le devis</f:facet>
 
 							<h:commandButton styleClass="btn btn-primary btn-xs"
 								action="#{redacteurBean.doValiderContrat(d.contrat)}"

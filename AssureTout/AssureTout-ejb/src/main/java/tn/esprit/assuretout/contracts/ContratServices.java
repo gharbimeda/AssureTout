@@ -20,4 +20,6 @@ public interface ContratServices {
 	public List<Contrat> findAll();
 
 	public Contrat findByClient(int id);
+	
+	public List<Contrat> findAllByType(int type);
 }

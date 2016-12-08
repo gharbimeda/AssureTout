@@ -66,4 +66,13 @@ public class ContratBienGarantieServicesImpl implements ContratBienGarantieServi
 
 		return query.getResultList();
 	}
+
+	@Override
+	public List<ContratBienGarantie> findByTypeContract(int type) {
+		TypedQuery<ContratBienGarantie> query = manager.createQuery(
+				"SELECT co FROM ContratBienGarantie co JOIN co.contrat c WHERE c.typeContrat = :type", ContratBienGarantie.class);
+		query.setParameter("type", type);
+
+		return query.getResultList();
+	}
 }

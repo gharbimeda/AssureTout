@@ -149,6 +149,17 @@ public class ClientBean {
 	public String detailSous(){
 		return "bienSousGaranties?faces-redirect=true";
 	}
+	
+	public String detailGarantieDevis(TypeGarantie garantie) {
+		typeGarantieActuel = garantie;
+		typesBiens = typeBienServices.findByGaranties(typeGarantieActuel.getId());
+		sousGaranties = sousGarantieServices.findByTypegarantie(typeGarantieActuel.getId());
+		return "bienDevis?faces-redirect=true";
+	}
+	
+	public String detailSousDevis(){
+		return "bienSousGarantiesDevis?faces-redirect=true";
+	}
 
 	public String SelectClient(Contrat c) {
 		this.setClient(c.getClient());

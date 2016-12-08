@@ -21,6 +21,7 @@ public class Contrat implements Serializable {
 	private Date dateFin;
 	private List<ContratBienGarantie> contratBienGaranties;
 	private Client client;
+	private int typeContrat;
 
 	private float Prime;
 
@@ -94,5 +95,13 @@ public class Contrat implements Serializable {
 
 	public void setEtat(Boolean etat) {
 		this.etat = etat;
+	}
+
+	public int getTypeContrat() {
+		return typeContrat;
+	}
+
+	public void setTypeContrat(int typeContrat) {
+		this.typeContrat = typeContrat;
 	}
 }

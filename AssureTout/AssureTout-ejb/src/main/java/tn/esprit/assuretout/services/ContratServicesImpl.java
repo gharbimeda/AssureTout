@@ -54,4 +54,11 @@ public class ContratServicesImpl implements ContratServices {
 
 		return query.getSingleResult();
 	}
+
+	@Override
+	public List<Contrat> findAllByType(int type) {
+		Query query = manager.createQuery("SELECT c FROM Contrat c WHERE c.typeContrat= :type", Contrat.class);
+		query.setParameter("type", type);
+		return query.getResultList();
+	}
 }

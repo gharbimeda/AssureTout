@@ -496,6 +496,61 @@ public class ContratBean {
 		Date d = new Date();
 		contrat.setDate(d);
 		contrat.setDateFin(fin);
+		contrat.setTypeContrat(0);
+		this.contratServices.addContrat(contrat);
+		c.setContrat(contrat);
+
+		for (int i = 0; i < finalGaranties.size(); i++) {
+			Garantie g = new Garantie();
+			g.setTypeGarantie(finalGaranties.get(i).getGarantie());
+			garantieServices.addGarantie(g);
+
+			c.setGarantie(g);
+			for (int j = 0; j < finalGaranties.get(i).getBiens().size(); j++) {
+
+				bienServices2.addBien(finalGaranties.get(i).getBiens().get(j), c);
+				// c.setBien(finalGaranties.get(i).getBiens().get(j));
+				// contratBienGarantieServices.addContratBienGarentie(c);
+				c = new ContratBienGarantie();
+				c.setContrat(contrat);
+				c.setGarantie(g);
+				for (int k = 0; k < finalGaranties.get(i).getBiens().get(j).getProprietes().size(); k++) {
+					Propriete p = new Propriete();
+					p = finalGaranties.get(i).getBiens().get(j).getProprietes().get(k);
+					p.setBien(finalGaranties.get(i).getBiens().get(j));
+					proprieteServices.addPropriete(p);
+
+				}
+
+			}
+			for (int j = 0; j < finalGaranties.get(i).getSousniveaus().size(); j++) {
+				GarantieSousGarantieNiveau cs = new GarantieSousGarantieNiveau();
+				cs.setGarantie(g);
+				cs.setSousGarantie(finalGaranties.get(i).getSousniveaus().get(j).getSousGarantie());
+				cs.setNiveau(finalGaranties.get(i).getSousniveaus().get(j).getNiveau());
+				garantieSousGarantieNiveauServices.addGarantieSousGarantieNiveau(cs);
+
+			}
+		}
+		init();
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		context.redirect(context.getRequestContextPath() + "/pages/client/index.xhtml");
+
+	}
+	
+	public void souscrireDevis() throws IOException {
+		ContratBienGarantie c = new ContratBienGarantie();
+
+		Contrat contrat = new Contrat();
+		contrat.setClient(this.client);
+
+		contrat.setPrime(this.prix / 12);
+		contrat.setEtat(false);
+
+		Date d = new Date();
+		contrat.setDate(d);
+		contrat.setDateFin(fin);
+		contrat.setTypeContrat(1);
 		this.contratServices.addContrat(contrat);
 		c.setContrat(contrat);
 

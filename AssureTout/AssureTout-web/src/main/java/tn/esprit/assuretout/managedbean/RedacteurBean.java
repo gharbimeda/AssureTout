@@ -33,11 +33,14 @@ public class RedacteurBean {
 	
 	private List<ContratBienGarantie> list;
 	
+	private List<ContratBienGarantie> listDevis;
+	
 	private List<GarantieSousGarantieNiveau> listSG ;
 
 	@PostConstruct
 	public void init() {
-		list = serviceC.findAll();
+		list = serviceC.findByTypeContract(0);
+		listDevis = serviceC.findByTypeContract(1);
 		listSG = new ArrayList<GarantieSousGarantieNiveau>();
 	}
 	
@@ -69,6 +72,14 @@ public class RedacteurBean {
 
 	public void setStep(int step) {
 		this.step = step;
+	}
+
+	public List<ContratBienGarantie> getListDevis() {
+		return listDevis;
+	}
+
+	public void setListDevis(List<ContratBienGarantie> listDevis) {
+		this.listDevis = listDevis;
 	}
 	
 	

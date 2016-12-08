@@ -22,6 +22,8 @@ public interface ContratBienGarantieServices {
 	public List<ContratBienGarantie> findAll();
 
 	public List<ContratBienGarantie> findByContract(Contrat c);
+	
+	public List<ContratBienGarantie> findByTypeContract(int type);
 
 	public List<ContratBienGarantie> findByBien(Bien bien);
 }

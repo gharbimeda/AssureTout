@@ -21,7 +21,7 @@ public class UserBean {
 	public String inscription() {
 		services.addClient(client);
 		System.out.println("mcheeeeeeeeeet");
-		return "/login.xhtml?faces-redirect=true";
+		return "/pages/public/login?faces-redirect=true";
 	}
 
 	public Client getClient() {
