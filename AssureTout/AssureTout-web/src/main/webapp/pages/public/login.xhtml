@@ -6,6 +6,27 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/templateClient/templateClient.xhtml">
 	<ui:define name="titleName"> Accueil </ui:define>
+	<ui:define name="menuContent">
+		<div class="bottom-header">
+			<div class="container">
+				<div class="main-navigation">
+					<ul class="menu">
+						<li class="menu-item"><a href="contact.html">Nous contacter</a></li>
+					</ul>
+				</div>
+				<div class="mobile-navigation"></div>
+			</div>
+		</div>
+	</ui:define>
+	<ui:define name="sliderContent">
+		<div class="hero hero-slider">
+			<ul class="slides">
+				<li
+					data-bg-image="#{request.contextPath}/resources/client/dummy/maquette.PNG">
+				</li>
+			</ul>
+		</div>
+	</ui:define>
 	<ui:define name="PageContent">
 		<div class="fullwidth-block greet-section">
 			<div class="container">
@@ -15,10 +36,11 @@
 						<h:outputText value="Entrez votre identifiant " />
 						<p:inputText value="#{access.login}" />
 						<h:outputText value="Entrez votre mot de passe " />
-						<p:inputText value="#{access.password}"/>
-					</h:panelGrid>					
+						<p:inputText value="#{access.password}" />
+					</h:panelGrid>
 					<p:commandButton action="#{access.doLogin()}" value="Connection"
 						ajax="false" class="btn btn-info" />
+					<a href="#{request.contextPath}/pages/public/inscription.xhtml"> s'inscrire </a>
 
 				</h:form>
 			</div>

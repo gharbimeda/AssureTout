@@ -6,6 +6,34 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/templateClient/templateClient.xhtml">
 	<ui:define name="titleName"> Accueil </ui:define>
+	<ui:define name="menuContent">
+	<div class="bottom-header">
+			<div class="container">
+				<div class="main-navigation">
+					<ul class="menu">
+						<li class="menu-item"><a href="about.html">Mon Dossier</a></li>
+						<li class="menu-item"><a href="insurance.html">Mes
+								informations</a></li>
+						<li class="menu-item"><a href="resource.html">Suivre mes
+								sinistres</a></li>
+						<li class="menu-item"><a href="#{request.contextPath}/pages/client/newSinistre.xhtml">Déclarer un
+								sinistre</a></li>
+						<li class="menu-item"><a href="contact.html">Nous
+								contacter</a></li>
+						<li class="menu-item"><h:form>
+								<h:commandLink action="#{access.doLogout()}"
+									value="Se déconnecter"/>
+							</h:form></li>
+					</ul>
+					<!-- .menu -->
+				</div>
+				<!-- .main-navigation -->
+
+
+				<div class="mobile-navigation"></div>
+			</div>
+		</div>
+	</ui:define>
 	<ui:define name="sliderContent">
 		<div class="hero hero-slider">
 			<ul class="slides">
@@ -36,28 +64,31 @@
 						<div class="feature">
 							<i class="icon-car"></i>
 							<h3 class="feature-title">Garantie Auto</h3>
-							<p> </p>
+							<p> Accidents, vols, bris de glace.... 
+							    Ne craignez plus rien avec
+							    Assure Tout </p>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="feature">
 							<i class="icon-sofa"></i>
 							<h3 class="feature-title">Garantie Habitation</h3>
-							<p></p>
+							<p>Maisons, Batiments, Atelier
+							Assure Tout assure tout vos immobiliers</p>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="feature">
 							<i class="icon-pool"></i>
 							<h3 class="feature-title">Garantie Prévoyance</h3>
-							<p></p>
+							<p>Assurer vous pour garantir une retraite royale</p>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="feature">
 							<i class="icon-nurse"></i>
 							<h3 class="feature-title">Garantie Santé</h3>
-							<p></p>
+							<p>Assurez vous contre tout ce qui menace votre santé</p>
 						</div>
 					</div>
 				</div>

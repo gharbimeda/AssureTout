@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateClient/templateClient.xhtml">
+	<ui:define name="titleName"> Accueil </ui:define>
+	<ui:define name="menuContent">
+		<div class="bottom-header">
+			<div class="container">
+				<div class="main-navigation">
+					<ul class="menu">
+
+						<li class="menu-item"><a href="contact.html">Nous
+								contacter</a></li>
+					</ul>
+					<!-- .menu -->
+				</div>
+				<!-- .main-navigation -->
+
+
+				<div class="mobile-navigation"></div>
+			</div>
+		</div>
+	</ui:define>
+	<ui:define name="PageContent">
+		
+			<div class="container">
+				<h2 class="section-title text-left">INSCRIPTION</h2>
+				<h:form class="contact-form">
+					<div class="row">
+						<div class="col-md-12">
+							<h:outputText value="Nom" />
+							<h:inputText placeholder="Nom" value="#{auth.client.nom}" />
+						</div>
+						<div class="col-md-12">
+							<h:outputText value="Prénom" />
+
+							<h:inputText placeholder="Prenom" value="#{auth.client.prenom}" />
+						</div>
+						<div class="col-md-12">
+							<h:outputText value="Email" />
+
+							<h:inputText id="mail" placeholder="Email"
+								value="#{auth.client.email}" />
+						</div>
+						<div class="col-md-12">
+							<h:outputText value="Mot de passe" />
+
+							<h:inputText type="password" placeholder="Mot de passe"
+								value="#{auth.client.password}" />
+						</div>
+						<div class="col-md-12">
+							<h:outputText value="Adresse" />
+							<h:inputText placeholder="Adresse" value="#{auth.client.adresse}" />
+						</div>
+						<div class="col-md-12">
+							<h:outputText value="Région" />
+							<h:inputText placeholder="Region" value="#{auth.client.region}" />
+						</div>
+						<div class="col-md-12">
+							<h:outputText value="Télephone" />
+							<h:inputText placeholder="Telephone"
+								value="#{auth.client.telephone}" />
+						</div>
+						<div class="col-md-12">
+							<h:outputText value="Date de naissance" />
+							<h:inputText  value="#{auth.client.dateNaissance}"></h:inputText>
+						</div>
+						<div class="col-md-12">
+							<h:outputText value="Sexe" />
+							<h:selectOneRadio value="#{auth.client.sexe}">
+								<f:selectItem itemLabel="M" itemValue="M" />
+								<f:selectItem itemLabel="F" itemValue="F" />
+							</h:selectOneRadio>
+						</div>
+
+
+						<h:messages id="messages" showDetail="true" autoUpdate="true"
+							closable="false" />
+
+						<h:commandButton value="S'inscrire" icon="fa fa-sign-in"
+							styleClass="Wid30 Fs18 White RaisedButton"
+							action="#{auth.addClient()}">
+						</h:commandButton>
+					</div>
+
+				</h:form>
+			</div>
+		
+	</ui:define>
+</ui:composition>

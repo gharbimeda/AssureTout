@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateClient/templateClient.xhtml">
+	<ui:define name="titleName"> Sinistre </ui:define>
+	<ui:define name="menuContent">
+		<div class="bottom-header">
+			<div class="container">
+				<div class="main-navigation">
+					<ul class="menu">
+						<li class="menu-item"><a href="about.html">Mon Dossier</a></li>
+						<li class="menu-item"><a href="insurance.html">Mes
+								informations</a></li>
+						<li class="menu-item"><a href="resource.html">Suivre mes
+								sinistres</a></li>
+						<li class="menu-item"><a href="contact.html">Déclarer un
+								sinistre</a></li>
+						<li class="menu-item"><a href="contact.html">Nous
+								contacter</a></li>
+						<li class="menu-item"><h:form>
+								<h:commandLink action="#{access.doLogout()}"
+									value="Se déconnecter" />
+							</h:form></li>
+					</ul>
+					<!-- .menu -->
+				</div>
+				<!-- .main-navigation -->
+
+
+				<div class="mobile-navigation"></div>
+			</div>
+		</div>
+	</ui:define>
+	<ui:define name="PageContent">
+		<div class="fullwidth-block greet-section">
+			<div class="container">
+				<h2 class="section-title">Déclaration Nouveau Sinistre</h2>
+				<h:form class="contact-form">
+					<div class="row">
+						<div class="col-md-12">
+							<h:outputText value="Date de survenance du sinistre" />
+							<h:inputText placeholder="jj/mm/aaaa" value=" " />
+						</div>
+						<div class="col-md-12">
+							<h:outputText value="Décrivez le sinistre" />
+							<h:inputTextarea value=" " />
+						</div>
+						<div class="col-md-12">
+							<h:outputText value="Importez une image du sinistre" />
+							<p:fileUpload
+								fileUploadListener="#{fileUploadView.handleFileUpload}"
+								mode="advanced" dragDropSupport="false" multiple="true"
+							    sizeLimit="100000" fileLimit="1"
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+								value="#{sinistreBean.images}" />
+						</div>
+						<p class="text-right">
+							<p:commandButton value="Enregitrer Sinistre"
+								action="#{sinistreBean.submit()}"></p:commandButton>
+						</p>
+
+					</div>
+				</h:form>
+
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
