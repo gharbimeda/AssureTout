@@ -48,7 +48,7 @@
 						<div class="col-md-12">
 							<h:outputText value="Mot de passe" />
 
-							<h:inputText type="password" placeholder="Mot de passe"
+							<p:password type="password" placeholder="Mot de passe"
 								value="#{auth.client.password}" />
 						</div>
 						<div class="col-md-12">
@@ -70,19 +70,15 @@
 						</div>
 						<div class="col-md-12">
 							<h:outputText value="Sexe" />
-							<h:selectOneRadio value="#{auth.client.sexe}">
+							<p:selectOneRadio value="#{auth.client.sexe}">
 								<f:selectItem itemLabel="M" itemValue="M" />
 								<f:selectItem itemLabel="F" itemValue="F" />
-							</h:selectOneRadio>
+							</p:selectOneRadio>
 						</div>
 
 
-						<h:messages id="messages" showDetail="true" autoUpdate="true"
-							closable="false" />
-
-						<h:commandButton value="S'inscrire" icon="fa fa-sign-in"
-							styleClass="Wid30 Fs18 White RaisedButton"
-							action="#{auth.addClient()}">
+						<h:commandButton value="S'inscrire" 
+							action="#{auth.inscription()}">
 						</h:commandButton>
 					</div>
 

@@ -18,13 +18,10 @@ public class UserBean {
 	
 	private Client client = new Client();
 
-	public String addClient() {
-		
+	public String inscription() {
 		services.addClient(client);
-		
 		System.out.println("mcheeeeeeeeeet");
 		return "/login.xhtml?faces-redirect=true";
-
 	}
 
 	public Client getClient() {

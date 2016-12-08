@@ -30,6 +30,7 @@ public class Sinistre implements Serializable {
 	private Etat etat;
 	private Client client;
 	private Redacteur redacteur;
+	private Float tarif;
 
 	public Sinistre() {
 		super();
@@ -45,7 +46,6 @@ public class Sinistre implements Serializable {
 		this.id = id;
 	}
 
-	@NotNull
 	public Date getDate() {
 		return date;
 	}
@@ -128,6 +128,14 @@ public class Sinistre implements Serializable {
 		return "Sinistre [id=" + id + ", date=" + date + ", image1=" + image1 + ", image2=" + image2 + ", description="
 				+ description + ", sousgaranties=" + sousgaranties + ", expertise=" + expertise + ", etat=" + etat
 				+ ", client=" + client + "]";
+	}
+
+	public Float getTarif() {
+		return tarif;
+	}
+
+	public void setTarif(Float tarif) {
+		this.tarif = tarif;
 	}
 
 }

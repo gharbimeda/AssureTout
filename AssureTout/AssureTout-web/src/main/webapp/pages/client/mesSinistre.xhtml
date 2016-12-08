@@ -37,34 +37,40 @@
 	<ui:define name="PageContent">
 		<div class="fullwidth-block greet-section">
 			<div class="container">
-				<h2 class="section-title">Déclaration Nouveau Sinistre</h2>
-				<h:form class="contact-form">
-					<div class="row">
-						<div class="col-md-12">
-							<h:outputText value="Date de survenance du sinistre" />
-							<h:inputText placeholder="jj/mm/aaaa" value=" " />
-						</div>
-						<div class="col-md-12">
-							<h:outputText value="Décrivez le sinistre" />
-							<h:inputTextarea value="#{sinistreBean.sinistre.description}" />
-						</div>
-						<div class="col-md-12">
-							<h:outputText value="Importez une image du sinistre" />
-							<p:fileUpload
-								fileUploadListener="#{fileUploadView.handleFileUpload}"
-								mode="advanced" dragDropSupport="false" multiple="true"
-							    sizeLimit="100000" fileLimit="1"
-								allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-								value="#{sinistreBean.images}" />
-						</div>
-						<p class="text-right">
-							<p:commandButton value="Enregitrer Sinistre"
-								action="#{sinistreBean.submit()}"></p:commandButton>
-						</p>
+				<h2 class="section-title">Mes Sinistre</h2>
+				<h:form>
+					<h:dataTable
+						styleClass="table table-striped table-bordered table-hover"
+						value="#{sinistreBean.sinistres}" var="d">
 
-					</div>
+						<h:column>
+							<f:facet name="header">Date</f:facet>
+							<h:outputText value="#{d.date}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Description</f:facet>
+							<h:outputText value="#{d.description}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Etat</f:facet>
+							<h:outputText value="#{d.etat}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Tarif</f:facet>
+							<h:outputText value="#{d.tarif}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Contester</f:facet>
+
+							<h:commandButton styleClass="btn btn-primary btn-xs"
+								action="#{sinistreBean.doContester(d)}" value="Contester"
+								disabled="#{d.etat=='TRAITE' ? 'true' : 'false'}">
+
+							</h:commandButton>
+						</h:column>
+
+					</h:dataTable>
 				</h:form>
-
 			</div>
 		</div>
 	</ui:define>
