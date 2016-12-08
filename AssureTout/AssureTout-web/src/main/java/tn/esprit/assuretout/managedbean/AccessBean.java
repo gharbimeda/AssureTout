@@ -43,7 +43,7 @@ public class AccessBean {
 				Courtier foundCourtier = (Courtier) auth.authUser(login, password);
 				identityBean.setUtilisateur(foundCourtier);
 				identityBean.setRole("courtier");
-				navigateTo = "/pages/courtier/dashbordCourtier?faces-redirect=true";
+				navigateTo = "/pages/courtier/dashboardCourtier?faces-redirect=true";
 			} else if (found instanceof Redacteur) {
 				Redacteur foundRedacteur = (Redacteur) auth.authUser(login, password);
 				identityBean.setUtilisateur(foundRedacteur);
