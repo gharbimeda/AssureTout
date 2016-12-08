@@ -7,9 +7,74 @@
 	template="/WEB-INF/templates/templateBack/templateBack.xhtml">
 	<ui:define name="titleName"> Dashboard </ui:define>
 	<ui:define name="Menu">
-		<li><a href="ui.html">Gestion des Contrats</a></li>
 		<li><a class="menu-top-active" href="table.html">Gestion des
 				sinistres</a></li>
 	</ui:define>
 	<ui:define name="PageContentName"> Gestion des sinistres </ui:define>
+	<ui:define name="PageContent">
+		<div class="panel panel-default">
+			<div class="panel-heading">Liste des utilisateurs :</div>
+			<div class="panel-body">
+				<h:form>
+					<h:dataTable
+						styleClass="table table-striped table-bordered table-hover"
+						value="#{sinnistreCourtBean.clients}" var="d">
+
+						<h:column>
+							<f:facet name="header">Client</f:facet>
+							<h:outputText value="#{d.email}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Prime Payée Par le client</f:facet>
+							<h:outputText value="#{d.contrat.prime}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Selectionner</f:facet>
+
+							<h:commandButton styleClass="btn btn-primary btn-xs" action=" "
+								value="Select">
+								<f:setPropertyActionListener value="#{d}"
+									target="#{sinnistreCourtBean.client}" />
+
+							</h:commandButton>
+
+						</h:column>
+					</h:dataTable>
+				</h:form>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">Nouveau Sinistre :</div>
+			<div class="panel-body">
+				<h:form>
+					<div class="row">
+						<div class="col-md-12">
+							<h:outputText value="Date de survenance du sinistre" />
+							<h:inputText placeholder="jj/mm/aaaa" value=" " />
+						</div>
+						<div class="col-md-12">
+							<h:outputText value="Décrivez le sinistre" />
+							<h:inputTextarea
+								value="#{sinnistreCourtBean.sinistre.description}" />
+						</div>
+						<div class="col-md-12">
+							<h:outputText value="Importez une image du sinistre" />
+							<p:fileUpload
+								fileUploadListener="#{fileUploadView.handleFileUpload}"
+								mode="advanced" dragDropSupport="false" multiple="true"
+								sizeLimit="100000" fileLimit="1"
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+								value="#{sinnistreCourtBean.images}" />
+						</div>
+						<hr />
+						<p class="text-right">
+							<h:commandButton value="Enregitrer Sinistre"
+								class="btn btn-success" action="#{sinnistreCourtBean.submit()}"></h:commandButton>
+						</p>
+
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
 </ui:composition>
