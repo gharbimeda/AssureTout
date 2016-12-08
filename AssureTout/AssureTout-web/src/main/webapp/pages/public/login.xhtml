@@ -15,8 +15,8 @@
 						<h:outputText value="Entrez votre identifiant " />
 						<p:inputText value="#{access.login}" />
 						<h:outputText value="Entrez votre mot de passe " />
-						<p:inputText value="#{access.password}"/>
-					</h:panelGrid>					
+						<p:password value="#{access.password}" />
+					</h:panelGrid>
 					<p:commandButton action="#{access.doLogin()}" value="Connection"
 						ajax="false" class="btn btn-info" />
 
