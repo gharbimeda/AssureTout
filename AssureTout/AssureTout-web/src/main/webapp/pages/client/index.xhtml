@@ -7,22 +7,24 @@
 	template="/WEB-INF/templates/templateClient/templateClient.xhtml">
 	<ui:define name="titleName"> Accueil </ui:define>
 	<ui:define name="menuContent">
-	<div class="bottom-header">
+		<div class="bottom-header">
 			<div class="container">
 				<div class="main-navigation">
 					<ul class="menu">
 						<li class="menu-item"><a href="about.html">Mon Dossier</a></li>
 						<li class="menu-item"><a href="insurance.html">Mes
 								informations</a></li>
-						<li class="menu-item"><a href="#{request.contextPath}/pages/client/mesSinistre.xhtml">Suivre mes
-								sinistres</a></li>
-						<li class="menu-item"><a href="#{request.contextPath}/pages/client/newSinistre.xhtml">Déclarer un
-								sinistre</a></li>
+						<li class="menu-item"><a
+							href="#{request.contextPath}/pages/client/mesSinistre.xhtml">Suivre
+								mes sinistres</a></li>
+						<li class="menu-item"><a
+							href="#{request.contextPath}/pages/client/newSinistre.xhtml">Déclarer
+								un sinistre</a></li>
 						<li class="menu-item"><a href="contact.html">Nous
 								contacter</a></li>
 						<li class="menu-item"><h:form>
 								<h:commandLink action="#{access.doLogout()}"
-									value="Se déconnecter"/>
+									value="Se déconnecter" />
 							</h:form></li>
 					</ul>
 					<!-- .menu -->
@@ -42,12 +44,11 @@
 					<div class="container">
 						<div class="slide-content">
 							<h2 class="slide-title">
-								Get your <strong>Life Insurance</strong>
+								Vous assurer <strong>C'est NOTRE METIER</strong>
 							</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Repellendus quos cumque odio soluta harum error sequi
-								laudantium, est nam perspiciatis eveniet maxime, esse possimus
-								architecto sunt natus reprehenderit debitis fugit.</p>
+							<p>Avec notre assurance vous n'avez pas à vous limiter aux
+								assurances basiques. Nous vous offrons la possibilité d'assurer
+								n'importe quel bien qui vous tient à coeur</p>
 						</div>
 					</div>
 				</li>
@@ -58,23 +59,22 @@
 		<div class="fullwidth-block greet-section">
 			<div class="container">
 				<h2 class="section-title">Bienvenue Chez Assure Tout</h2>
-				
+
 				<div class="row">
 					<div class="col-md-3">
 						<div class="feature">
 							<i class="icon-car"></i>
 							<h3 class="feature-title">Garantie Auto</h3>
-							<p> Accidents, vols, bris de glace.... 
-							    Ne craignez plus rien avec
-							    Assure Tout </p>
+							<p>Accidents, vols, bris de glace.... Ne craignez plus rien
+								avec Assure Tout</p>
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="feature">
 							<i class="icon-sofa"></i>
 							<h3 class="feature-title">Garantie Habitation</h3>
-							<p>Maisons, Batiments, Atelier
-							Assure Tout assure tout vos immobiliers</p>
+							<p>Maisons, Batiments, Atelier Assure Tout assure tout vos
+								immobiliers</p>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -92,7 +92,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</ui:define>
