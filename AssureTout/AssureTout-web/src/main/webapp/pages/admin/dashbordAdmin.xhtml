@@ -4,12 +4,47 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/templateBack/templateBack.xhtml">
+	template="/WEB-INF/templates/templateAdmin/templateAdmin.xhtml">
 	<ui:define name="titleName"> Dashboard </ui:define>
 	<ui:define name="Menu">
-		<li><a href="ui.html">Gestion des Contrats</a></li>
-		<li><a class="menu-top-active" href="table.html">Gestion des
-				sinistres</a></li>
+		<li><a class="menu-top-active"
+			href="#{request.contextPath}/pages/admin/dashbordAdmin.xhtml">Gestion
+				des Types de Garantie</a></li>
+		<li><a href="table.html">Gestion des Utilisateurs</a></li>
 	</ui:define>
-	<ui:define name="PageContentName"> Gestion des sinistres </ui:define>
+	<ui:define name="PageContentName"> Gestion des Types de Garantie 
+		<div>
+			<br />
+			<h:form>
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputText value="Nom " />
+					<p:inputText value="#{adminBean.typeGarantie.nom}" />
+					<h:outputText value="Description " />
+					<p:inputTextarea rows="6" cols="23"
+						value="#{adminBean.typeGarantie.description}" />
+					<p:commandButton action="#{adminBean.doAddTypeGarantie()}"
+						value="Ajout" ajax="false" class="btn btn-info" />
+				</h:panelGrid>
+			</h:form>
+			<br /> <br />
+		</div>
+		<ui:repeat var="t" value="#{adminBean.typeGaranties}">
+			<div class="col-md-4 col-sm-6 wow fadeInDown animated"
+				data-wow-duration="1000ms" data-wow-delay="600ms"
+				style="visibility: visible; animation-duration: 1000ms; animation-delay: 600ms; animation-name: fadeInDown;"
+				title="Liste Types Garantie">
+				<div class="feature-wrap">
+					<i class="fa fa-money"></i>
+					<h3>
+						<a style="color: #334458">#{t.nom}</a>
+					</h3>
+					<h4>#{t.description}</h4>
+					<p:commandButton action="#{adminBean.detailGarantie(t)}"
+						value="Info" class="btn btn-info">
+					</p:commandButton>
+				</div>
+			</div>
+		</ui:repeat>
+
+	</ui:define>
 </ui:composition>

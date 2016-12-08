@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateAdmin/templateAdmin.xhtml">
+	<ui:define name="titleName"> Dashboard </ui:define>
+	<ui:define name="Menu">
+		<li><a class="menu-top-active"
+			href="#{request.contextPath}/pages/admin/dashbordAdmin.xhtml">Gestion
+				des Types de Garantie</a></li>
+		<li><a href="table.html">Gestion des Utilisateurs</a></li>
+	</ui:define>
+	<ui:define name="PageContentName"> Détail de #{adminBean.typeGarantieActuel.nom}
+		<br />
+		<br />
+		<p:fieldset legend="Types de Bien"
+			style="color: #005B96; font-size: 20px;">
+			<div>
+				<h:form>
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputText value="Nom" />
+						<p:inputText value="#{adminBean.typeBien.nom}" />
+						<br />
+						<p:commandButton action="#{adminBean.doAddTypeBien()}"
+							value="Ajout" ajax="false" />
+					</h:panelGrid>
+				</h:form>
+			</div>
+			<div>
+				<ui:repeat var="tb" value="#{adminBean.typesBiens}">
+					<div class="col-md-4 col-sm-6 wow fadeInDown animated"
+						data-wow-duration="1000ms" data-wow-delay="600ms"
+						style="visibility: visible; animation-duration: 1000ms; animation-delay: 600ms; animation-name: fadeInDown;"
+						title="Liste Types Biens">
+						<div class="feature-wrap">
+							<i class="fa fa-money"></i>
+							<h3>
+								<a style="color: #334458">#{tb.nom}</a>
+							</h3>
+						</div>
+					</div>
+				</ui:repeat>
+			</div>
+		</p:fieldset>
+		<br />
+		<br />
+		<p:fieldset legend="Sous Garanties"
+			style="color: #005B96; font-size: 20px;">
+			<div>
+				<h:form>
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputText value="Nom" />
+						<p:inputText value="#{adminBean.sousGarantie.nom}" />
+						<h:outputText value="Description" />
+						<p:inputTextarea rows="6" cols="23"
+							value="#{adminBean.sousGarantie.description}" />
+						<h:outputText value="Prix" />
+						<p:inputText value="#{adminBean.sousGarantie.prix}" />
+						<br />
+						<p:commandButton action="#{adminBean.doAddSousGarantie()}"
+							value="Ajout" ajax="false" class="btn btn-info" />
+					</h:panelGrid>
+				</h:form>
+			</div>
+			<div>
+				<ui:repeat var="sg" value="#{adminBean.sousGaranties}">
+					<div class="col-md-4 col-sm-6 wow fadeInDown animated"
+						data-wow-duration="1000ms" data-wow-delay="600ms"
+						style="visibility: visible; animation-duration: 1000ms; animation-delay: 600ms; animation-name: fadeInDown;"
+						title="Liste Types Biens">
+						<div class="feature-wrap">
+							<i class="fa fa-money"></i>
+							<h3>
+								<a style="color: #334458">#{sg.nom}</a>
+							</h3>
+							<h4>#{sg.description}</h4>
+							<h4>#{sg.prix}</h4>
+						</div>
+					</div>
+				</ui:repeat>
+			</div>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>
