@@ -33,11 +33,12 @@ public class RedacteurBean {
 	
 	private List<ContratBienGarantie> list;
 	
-	private List<GarantieSousGarantieNiveau> listSG = new ArrayList<GarantieSousGarantieNiveau>();
+	private List<GarantieSousGarantieNiveau> listSG ;
 
 	@PostConstruct
 	public void init() {
 		list = serviceC.findAll();
+		listSG = new ArrayList<GarantieSousGarantieNiveau>();
 	}
 	
 	public String doValiderContrat(Contrat c){

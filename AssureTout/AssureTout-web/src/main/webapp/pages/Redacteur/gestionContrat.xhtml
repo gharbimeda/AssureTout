@@ -26,7 +26,7 @@
 
 						<h:column>
 							<f:facet name="header">Client</f:facet>
-							<h:outputText value="#{d.contrat.client.email}" />
+							<h:outputText value="#{d.contrat.client.email}"  />
 						</h:column>
 						<h:column>
 							<f:facet name="header">Prime du contrat</f:facet>
@@ -37,18 +37,10 @@
 							<h:outputText value="#{d.garantie.typeGarantie.nom}" />
 						</h:column>
 						<h:column>
-							<f:facet name="header">Type Garantie</f:facet>
-							<h:outputText value="#{d.garantie.typeGarantie.nom}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Bien</f:facet>
-							<h:outputText value="#{d.garantie.contratBienGaranties}" />
-						</h:column>
-						<h:column>
 							<f:facet name="header">Etat</f:facet>
 							<h:outputText
 								styleClass="#{d.contrat.etat=='false' ? 'label label-warning' :  'label label-success' }"
-								value="#{d.contrat.etat}" />
+								value="#{d.contrat.etat=='false'? 'En Attente' :'Valide'}" />
 						</h:column>
 						<h:column>
 							<f:facet name="header">Afficher les sous garanties</f:facet>
@@ -68,7 +60,7 @@
 							<h:commandButton styleClass="btn btn-primary btn-xs"
 								action="#{redacteurBean.doValiderContrat(d.contrat)}"
 								value="refuser"
-								disabled="#{d.contrat.etat=='true' ? 'false' : 'true'}">
+								disabled="#{d.contrat.etat=='false' ? 'false' : 'true'}">
 
 							</h:commandButton>
 						</h:column>
