@@ -8,7 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import tn.esprit.assuretout.contracts.SinistreServices;
 import tn.esprit.assuretout.entities.Client;
@@ -16,7 +16,7 @@ import tn.esprit.assuretout.entities.Etat;
 import tn.esprit.assuretout.entities.Sinistre;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class SinistreBean {
 
 	@EJB
@@ -30,12 +30,10 @@ public class SinistreBean {
 	private List<String> images = new ArrayList<String>();
 
 	private List<Sinistre> sinistres;
-	private List<Sinistre> sinistresRedac;
 
 	@PostConstruct
 	public void init() {
 		sinistres = sinistreServices.findByClient(client);
-		sinistresRedac = sinistreServices.findAll();
 	}
 
 	public String submit() {
@@ -55,7 +53,6 @@ public class SinistreBean {
 		sinistreServices.update(sinistre);
 		return "/pages/client/mesSinistre?faces-redirect=true";
 	}
-
 
 	public Sinistre getSinistre() {
 		return sinistre;
@@ -87,14 +84,6 @@ public class SinistreBean {
 
 	public void setSinistres(List<Sinistre> sinistres) {
 		this.sinistres = sinistres;
-	}
-
-	public List<Sinistre> getSinistresRedac() {
-		return sinistresRedac;
-	}
-
-	public void setSinistresRedac(List<Sinistre> sinistresRedac) {
-		this.sinistresRedac = sinistresRedac;
 	}
 
 }

@@ -1,11 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:f="http://java.sun.com/jstl/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/templateClient/templateClient.xhtml">
-	<ui:define name="titleName"> Sinistre </ui:define>
+	<ui:define name="titleName"> Accueil </ui:define>
 	<ui:define name="menuContent">
 		<div class="bottom-header">
 			<div class="container">
@@ -39,44 +39,67 @@
 			</div>
 		</div>
 	</ui:define>
+	<ui:define name="sliderContent">
+		<div class="hero hero-slider">
+			<ul class="slides">
+				<li
+					data-bg-image="#{request.contextPath}/resources/client/dummy/maquette.PNG">
+					<div class="container">
+						<div class="slide-content">
+							<h2 class="slide-title">
+								Vous assurer <strong>C'est NOTRE METIER</strong>
+							</h2>
+							<p>Avec notre assurance vous n'avez pas à vous limiter aux
+								assurances basiques. Nous vous offrons la possibilité d'assurer
+								n'importe quel bien qui vous tient à coeur</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</ui:define>
 	<ui:define name="PageContent">
 		<div class="fullwidth-block greet-section">
 			<div class="container">
-				<h2 class="section-title">Mes Sinistre</h2>
-				<h:form>
-					<h:dataTable
-						styleClass="table table-striped table-bordered table-hover"
-						value="#{sinistreBean.sinistres}" var="d">
+				<h2 class="section-title">Ajouter un Bien</h2>
 
-						<h:column>
-							<f:facet name="header">Date</f:facet>
-							<h:outputText value="#{d.date}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Description</f:facet>
-							<h:outputText value="#{d.description}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Etat</f:facet>
-							<h:outputText value="#{d.etat}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Montant Remboursement</f:facet>
-							<h:outputText value="#{d.tarif}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Contester</f:facet>
+				<div class="row">
 
-							<h:commandButton styleClass="btn btn-primary btn-xs"
-								action="#{sinistreBean.doContester(d)}" value="Contester"
-								disabled="#{d.etat=='TRAITE' ? 'true' : 'false'}">
+					<f:forEach items="#{contrat.types}" var="a">
+						<div class="col-md-3">
+							<div class="feature">
+								<h3 class="feature-title">#{a.nom}</h3>
+								<h2 class="feature-title">#{a.icone}</h2>
+								<h:form>
 
-							</h:commandButton>
-						</h:column>
 
-					</h:dataTable>
-				</h:form>
+									<p:commandButton value="Ajouter"
+										styleClass="BlueButton RaisedButton Animated03 changecolor PinkBack"
+										action="#{contrat.ajoutTypeBien(a)}" />
+								</h:form>
+							</div>
+						</div>
+
+					</f:forEach>
+				</div>
+
+
+
+
+
 			</div>
 		</div>
+
+
+
+
 	</ui:define>
 </ui:composition>
+
+
+
+
+
+
+
+

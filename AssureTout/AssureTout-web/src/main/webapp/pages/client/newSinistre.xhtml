@@ -11,14 +11,19 @@
 			<div class="container">
 				<div class="main-navigation">
 					<ul class="menu">
-						<li class="menu-item"><a href="about.html">Mon Dossier</a></li>
+						<li class="menu-item"><a
+							href="#{request.contextPath}/pages/client/Contrat/bien.xhtml">Ajouter
+								Contrat</a></li>
 						<li class="menu-item"><a href="insurance.html">Mes
 								informations</a></li>
-						<li class="menu-item"><a href="#{request.contextPath}/pages/client/mesSinistre.xhtml">Suivre mes
-								sinistres</a></li>
-						<li class="menu-item"><a href="#{request.contextPath}/pages/client/newSinistre.xhtml">Déclarer un
-								sinistre</a></li>
-						<li class="menu-item"><a href="contact.html">Nous
+						<li class="menu-item"><a
+							href="#{request.contextPath}/pages/client/mesSinistre.xhtml">Suivre
+								mes sinistres</a></li>
+						<li class="menu-item"><a
+							href="#{request.contextPath}/pages/client/newSinistre.xhtml">Déclarer
+								un sinistre</a></li>
+						<li class="menu-item"><a
+							href="#{request.contextPath}/pages/client/contact.xhtml">Nous
 								contacter</a></li>
 						<li class="menu-item"><h:form>
 								<h:commandLink action="#{access.doLogout()}"
@@ -53,7 +58,7 @@
 							<p:fileUpload
 								fileUploadListener="#{fileUploadView.handleFileUpload}"
 								mode="advanced" dragDropSupport="false" multiple="true"
-							    sizeLimit="100000" fileLimit="1"
+								sizeLimit="100000" fileLimit="1"
 								allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
 								value="#{sinistreBean.images}" />
 						</div>

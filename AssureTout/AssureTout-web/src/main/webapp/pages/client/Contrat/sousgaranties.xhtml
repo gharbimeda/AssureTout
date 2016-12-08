@@ -6,6 +6,39 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/templateClient/templateClient.xhtml">
 	<ui:define name="titleName"> Accueil </ui:define>
+	<ui:define name="menuContent">
+		<div class="bottom-header">
+			<div class="container">
+				<div class="main-navigation">
+					<ul class="menu">
+						<li class="menu-item"><a
+							href="#{request.contextPath}/pages/client/Contrat/bien.xhtml">Ajouter
+								Contrat</a></li>
+						<li class="menu-item"><a href="insurance.html">Mes
+								informations</a></li>
+						<li class="menu-item"><a
+							href="#{request.contextPath}/pages/client/mesSinistre.xhtml">Suivre
+								mes sinistres</a></li>
+						<li class="menu-item"><a
+							href="#{request.contextPath}/pages/client/newSinistre.xhtml">Déclarer
+								un sinistre</a></li>
+						<li class="menu-item"><a
+							href="#{request.contextPath}/pages/client/contact.xhtml">Nous
+								contacter</a></li>
+						<li class="menu-item"><h:form>
+								<h:commandLink action="#{access.doLogout()}"
+									value="Se déconnecter" />
+							</h:form></li>
+					</ul>
+					<!-- .menu -->
+				</div>
+				<!-- .main-navigation -->
+
+
+				<div class="mobile-navigation"></div>
+			</div>
+		</div>
+	</ui:define>
 	<ui:define name="sliderContent">
 		<div class="hero hero-slider">
 			<ul class="slides">
@@ -14,12 +47,11 @@
 					<div class="container">
 						<div class="slide-content">
 							<h2 class="slide-title">
-								Get your <strong>Life Insurance</strong>
+								Vous assurer <strong>C'est NOTRE METIER</strong>
 							</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Repellendus quos cumque odio soluta harum error sequi
-								laudantium, est nam perspiciatis eveniet maxime, esse possimus
-								architecto sunt natus reprehenderit debitis fugit.</p>
+							<p>Avec notre assurance vous n'avez pas à vous limiter aux
+								assurances basiques. Nous vous offrons la possibilité d'assurer
+								n'importe quel bien qui vous tient à coeur</p>
 						</div>
 					</div>
 				</li>
@@ -27,7 +59,7 @@
 		</div>
 	</ui:define>
 	<ui:define name="PageContent">
-	<script type="text/javascript">
+		<script type="text/javascript">
     function handleDrop(event, ui) {
         var droppedCar = ui.draggable;
  
@@ -38,16 +70,16 @@
 		<h:form id="carForm">
 			<p:fieldset id="availableCarsField"
 				legend="Sous Garanties disponibles">
-				<p:dataGrid id="availableCars" var="a" value="#{contrat.sousniveaus}"
-					columns="3">
+				<p:dataGrid id="availableCars" var="a"
+					value="#{contrat.sousniveaus}" columns="3">
 					<p:panel id="pnl" header="#{a.sousGarantie.nom}"
 						style="text-align:center">
 						<h:panelGrid columns="1" style="width:100%">
 			#{a.sousGarantie.description}
 						</h:panelGrid>
 						<p:commandButton value="Ajouter" styleClass="RaisedButton"
-					action="#{contrat.ajoutSousNiveau(a)}" />
-						
+							action="#{contrat.ajoutSousNiveau(a)}" />
+
 					</p:panel>
 
 					<p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar"
@@ -78,7 +110,7 @@
 
 						<p:column headerText="Niveau">
 
-							<p:selectOneMenu value="#{selected.niveau.id}" >
+							<p:selectOneMenu value="#{selected.niveau.id}">
 								<f:selectItems value="#{contrat.niveaus}" var="curr"
 									itemValue="#{curr.id}"
 									itemLabel="#{curr.nom}   #{curr.tauxRisque}%" />
@@ -87,7 +119,8 @@
 
 						<p:column style="width:32px">
 							<p:commandButton icon="fa fa-times"
-								actionListener="#{contrat.removeSousgarantie(selected)}" partialSubmit="true">
+								actionListener="#{contrat.removeSousgarantie(selected)}"
+								partialSubmit="true">
 								<f:ajax execute="carForm" render="carForm" />
 							</p:commandButton>
 						</p:column>
@@ -95,15 +128,15 @@
 				</p:outputPanel>
 			</p:fieldset>
 
-			
+
 			<div class="EmptyBox30"></div>
 			<div class="TexAlCenter">
 				<p:commandButton value="Valider" styleClass="RaisedButton"
 					action="#{contrat.validerSousgarantie()}" />
-				
+
 			</div>
 		</h:form>
-		
+
 	</ui:define>
 </ui:composition>
 

@@ -3,9 +3,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/templateClient/templateClient.xhtml">
-	<ui:define name="titleName"> Sinistre </ui:define>
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
 	<ui:define name="menuContent">
 		<div class="bottom-header">
 			<div class="container">
@@ -39,44 +37,22 @@
 			</div>
 		</div>
 	</ui:define>
-	<ui:define name="PageContent">
-		<div class="fullwidth-block greet-section">
-			<div class="container">
-				<h2 class="section-title">Mes Sinistre</h2>
-				<h:form>
-					<h:dataTable
-						styleClass="table table-striped table-bordered table-hover"
-						value="#{sinistreBean.sinistres}" var="d">
+	<ui:define name="content">
 
-						<h:column>
-							<f:facet name="header">Date</f:facet>
-							<h:outputText value="#{d.date}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Description</f:facet>
-							<h:outputText value="#{d.description}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Etat</f:facet>
-							<h:outputText value="#{d.etat}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Montant Remboursement</f:facet>
-							<h:outputText value="#{d.tarif}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Contester</f:facet>
-
-							<h:commandButton styleClass="btn btn-primary btn-xs"
-								action="#{sinistreBean.doContester(d)}" value="Contester"
-								disabled="#{d.etat=='TRAITE' ? 'true' : 'false'}">
-
-							</h:commandButton>
-						</h:column>
-
-					</h:dataTable>
-				</h:form>
-			</div>
+		<div class="ContainerIndent">
+			<h2 class="BigTopic">Choisissez une garantie</h2>
+			<h:form>
+				<p:breadCrumb>
+					<p:menuitem value="Categories" url="#" />
+					<p:menuitem value="Créer votre contrat" />
+				</p:breadCrumb>
+			</h:form>
 		</div>
+		<hr />
+
+		<div class="EmptyBox30"></div>
+		<ui:include src="garanties.xhtml" />
+
+
 	</ui:define>
 </ui:composition>
