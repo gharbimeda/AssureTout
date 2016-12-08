@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateAdmin/templateAdmin.xhtml">
+	<ui:define name="titleName"> Dashboard </ui:define>
+	<ui:define name="Menu">
+		<li><a
+			href="#{request.contextPath}/pages/admin/dashbordAdmin.xhtml">Gestion
+				des Types de Garantie</a></li>
+		<li><a
+			href="#{request.contextPath}/pages/admin/gestionUsers.xhtml"
+			class="menu-top-active">Gestion des Utilisateurs</a></li>
+	</ui:define>
+	<ui:define name="PageContentName"> Ajout Courtier
+		<br />
+		<br />
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="Nom" />
+				<h:inputText value="#{ajoutPersonnelBean.courtier.nom}" />
+				<h:outputText value="Prenom" />
+				<h:inputText value="#{ajoutPersonnelBean.courtier.prenom}" />
+				<h:outputText value="Email" />
+				<h:inputText value="#{ajoutPersonnelBean.courtier.email}" />
+				<h:outputText value="Password" />
+				<p:password value="#{ajoutPersonnelBean.courtier.password}" />
+				<h:outputText value="Addresse" />
+				<h:inputText value="#{ajoutPersonnelBean.courtier.adresse}" />
+				<h:outputText value="Region" />
+				<h:inputText value="#{ajoutPersonnelBean.courtier.region}" />
+				<h:outputText value="Telephone" />
+				<h:inputText value="#{ajoutPersonnelBean.courtier.telephone}" />
+				<h:commandButton class="btn btn-primary btn-sm"
+					action="#{ajoutPersonnelBean.doAddCourtier()}" value="Ajout" />
+			</h:panelGrid>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
