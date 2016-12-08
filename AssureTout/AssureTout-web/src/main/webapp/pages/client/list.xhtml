@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+		<h:form id="Biens">
+	<p:dataGrid var="a" value="#{contrat.biensGarantie}" columns="3"
+		layout="grid" rows="12" paginator="true" id="cars"
+		paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink}" emptyMessage="Pas de biens">
+
+
+
+
+			<p:panel header="#{a.nom}" style="text-align:center">
+				<h:panelGrid columns="1" style="width:100%">
+					<h:outputText value="#{a.proprietes.get(0).valeur}"
+						styleClass="Fs18 FontRalewaySemiBold" />
+
+					<h:outputText value="#{a.proprietes.get(1).valeur}" />
+
+					<p:commandButton icon="fa fa-times Fs15 Red"
+						styleClass="BlueTextButton RaisedButton" action="#{contrat.removeBien(a)}">
+						
+						<f:ajax execute="Biens" render="Biens" />
+			
+					</p:commandButton>
+				</h:panelGrid>
+			</p:panel>
+
+	
+	</p:dataGrid>
+	</h:form>
+
+
+
+</ui:composition>

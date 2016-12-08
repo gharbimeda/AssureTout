@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<div class="Container">
+
+
+<ui:repeat value="#{contrat.garanties}" var="a">
+	<div class="Container33 Responsive50 TexAlCenter HoverEffect ">
+			<div class="ContainerIndent">
+				<div class="ShadowEffect Card">
+					<i class="#{a.icone} Fs100 Blue"></i>
+					<div class="EmptyBox30"></div>
+					<h1>#{a.nom}</h1>
+					
+					<div class="EmptyBox30"></div>
+					<h:form>
+					
+					<p:commandButton value="Ajouter"
+						styleClass="BlueButton RaisedButton Animated03 changecolor PinkBack" action="#{contrat.ajoutGarantie(a)}" />
+						</h:form>
+
+
+				</div>
+			</div>
+		</div>
+		</ui:repeat>
+	
+		
+		
+		
+	</div>
+
+
+</ui:composition>

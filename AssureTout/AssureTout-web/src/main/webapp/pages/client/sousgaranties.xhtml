@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateClient/templateClient.xhtml">
+	<ui:define name="titleName"> Accueil </ui:define>
+	<ui:define name="sliderContent">
+		<div class="hero hero-slider">
+			<ul class="slides">
+				<li
+					data-bg-image="#{request.contextPath}/resources/client/dummy/maquette.PNG">
+					<div class="container">
+						<div class="slide-content">
+							<h2 class="slide-title">
+								Get your <strong>Life Insurance</strong>
+							</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+								Repellendus quos cumque odio soluta harum error sequi
+								laudantium, est nam perspiciatis eveniet maxime, esse possimus
+								architecto sunt natus reprehenderit debitis fugit.</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</ui:define>
+	<ui:define name="PageContent">
+	<script type="text/javascript">
+    function handleDrop(event, ui) {
+        var droppedCar = ui.draggable;
+ 
+        droppedCar.fadeOut('fast');
+    }
+</script>
+
+		<h:form id="carForm">
+			<p:fieldset id="availableCarsField"
+				legend="Sous Garanties disponibles">
+				<p:dataGrid id="availableCars" var="a" value="#{contrat.sousniveaus}"
+					columns="3">
+					<p:panel id="pnl" header="#{a.sousGarantie.nom}"
+						style="text-align:center">
+						<h:panelGrid columns="1" style="width:100%">
+			#{a.sousGarantie.description}
+						</h:panelGrid>
+						<p:commandButton value="Ajouter" styleClass="RaisedButton"
+					action="#{contrat.ajoutSousNiveau(a)}" />
+						
+					</p:panel>
+
+					<p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar"
+						stack=".ui-panel" />
+				</p:dataGrid>
+			</p:fieldset>
+
+			<p:fieldset id="selectedCars" legend="Sous Garanties choisies"
+				style="margin-top:20px">
+				<p:outputPanel id="dropArea">
+					<h:outputText value="!!!AJOUTEZ VOS sous garanties!!!"
+						rendered="#{empty contrat.selectedSousniveaus}"
+						style="font-size:24px;" />
+					<p:dataTable id="selectedCarsTable" var="selected"
+						value="#{contrat.selectedSousniveaus}"
+						rendered="#{not empty contrat.selectedSousniveaus}">
+						<p:column headerText="Nom">
+							<h:outputText value="#{selected.sousGarantie.nom}" />
+						</p:column>
+
+						<p:column headerText="Description">
+							<h:outputText value="#{selected.sousGarantie.description}" />
+						</p:column>
+
+						<p:column headerText="Prix" style="width:32px">
+							<h:outputText value="#{selected.sousGarantie.prix}" />
+						</p:column>
+
+						<p:column headerText="Niveau">
+
+							<p:selectOneMenu value="#{selected.niveau.id}" >
+								<f:selectItems value="#{contrat.niveaus}" var="curr"
+									itemValue="#{curr.id}"
+									itemLabel="#{curr.nom}   #{curr.tauxRisque}%" />
+							</p:selectOneMenu>
+						</p:column>
+
+						<p:column style="width:32px">
+							<p:commandButton icon="fa fa-times"
+								actionListener="#{contrat.removeSousgarantie(selected)}" partialSubmit="true">
+								<f:ajax execute="carForm" render="carForm" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
+			</p:fieldset>
+
+			
+			<div class="EmptyBox30"></div>
+			<div class="TexAlCenter">
+				<p:commandButton value="Valider" styleClass="RaisedButton"
+					action="#{contrat.validerSousgarantie()}" />
+				
+			</div>
+		</h:form>
+		
+	</ui:define>
+</ui:composition>
+
+
