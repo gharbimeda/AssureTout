@@ -22,36 +22,53 @@
 				<h:form>
 					<h:dataTable
 						styleClass="table table-striped table-bordered table-hover"
-						value="#{sinistreRedacBean.sinistresRedac}" var="d">
+						value="#{redacteurBean.list}" var="d">
 
 						<h:column>
 							<f:facet name="header">Client</f:facet>
-							<h:outputText value="#{d.client.email}" />
+							<h:outputText value="#{d.contrat.client.email}" />
 						</h:column>
 						<h:column>
-							<f:facet name="header">Date</f:facet>
-							<h:outputText value="#{d.date}" />
+							<f:facet name="header">Prime du contrat</f:facet>
+							<h:outputText value="#{d.contrat.prime}" />
 						</h:column>
 						<h:column>
-							<f:facet name="header">Description</f:facet>
-							<h:outputText value="#{d.description}" />
+							<f:facet name="header">Type Garantie</f:facet>
+							<h:outputText value="#{d.garantie.typeGarantie.nom}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Type Garantie</f:facet>
+							<h:outputText value="#{d.garantie.typeGarantie.nom}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Bien</f:facet>
+							<h:outputText value="#{d.garantie.contratBienGaranties}" />
 						</h:column>
 						<h:column>
 							<f:facet name="header">Etat</f:facet>
 							<h:outputText
-								styleClass="#{d.etat=='ENCOURS' ? 'label label-warning' : d.etat=='TRAITE' ? 'label label-success' : 'label label-danger'}"
-								value="#{d.etat}" />
+								styleClass="#{d.contrat.etat=='false' ? 'label label-warning' :  'label label-success' }"
+								value="#{d.contrat.etat}" />
 						</h:column>
 						<h:column>
-							<f:facet name="header">Montant Remboursement</f:facet>
-							<h:outputText value="#{d.tarif}" />
+							<f:facet name="header">Afficher les sous garanties</f:facet>
+							<h:commandButton styleClass="btn btn-primary btn-xs" action=" "
+								value="Select">
+								<f:setPropertyActionListener
+									value="#{d.garantie.garantieSousGarantieNiveaux}"
+									target="#{redacteurBean.listSG}" />
+								<f:setPropertyActionListener value="1"
+									target="#{redacteurBean.step}" />
+
+							</h:commandButton>
 						</h:column>
 						<h:column>
-							<f:facet name="header">Refuser Sinistre</f:facet>
+							<f:facet name="header">Valider le contrat</f:facet>
 
 							<h:commandButton styleClass="btn btn-primary btn-xs"
-								action="#{sinistreRedacBean.doRefuser()}" value="refuser"
-								disabled="#{d.etat=='ENCOURS' ? 'false' : 'true'}">
+								action="#{redacteurBean.doValiderContrat(d.contrat)}"
+								value="refuser"
+								disabled="#{d.contrat.etat=='true' ? 'false' : 'true'}">
 
 							</h:commandButton>
 						</h:column>
@@ -60,5 +77,32 @@
 				</h:form>
 			</div>
 		</div>
+		<h:form rendered="#{redacteurBean.step==1? 'true' : 'false'}">
+			<div class="panel panel-default">
+				<div class="panel-heading">List des sous garanties:</div>
+				<div class="panel-body">
+
+					<h:dataTable
+						styleClass="table table-striped table-bordered table-hover"
+						value="#{redacteurBean.listSG}" var="d">
+
+						<h:column>
+							<f:facet name="header">Sous Garantie</f:facet>
+							<h:outputText value="#{d.sousGarantie.nom}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Type Sous Garantie</f:facet>
+							<h:outputText value="#{d.sousGarantie.type}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Prime du contrat</f:facet>
+							<h:outputText value="#{d.sousGarantie.prix}" />
+						</h:column>
+
+					</h:dataTable>
+
+				</div>
+			</div>
+		</h:form>
 	</ui:define>
 </ui:composition>
