@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/templateBack/templateBack.xhtml">
+	<ui:define name="titleName"> Dashboard </ui:define>
+	<ui:define name="Menu">
+		<li><a
+			href="#{request.contextPath}/pages/Redacteur/gestionContrat.xhtml">Gestion
+				des Contrats</a></li>
+		<li><a class="menu-top-active"
+			href="#{request.contextPath}/pages/Redacteur/dashboardRedacteur.xhtml">Gestion
+				des sinistres</a></li>
+	</ui:define>
+	<ui:define name="PageContentName"> Gestion des sinistres </ui:define>
+	<ui:define name="PageContent">
+		<div class="panel panel-default">
+			<div class="panel-heading">Valider les contrats:</div>
+			<div class="panel-body">
+				<h:form>
+					<h:dataTable
+						styleClass="table table-striped table-bordered table-hover"
+						value="#{sinistreRedacBean.sinistresRedac}" var="d">
+
+						<h:column>
+							<f:facet name="header">Client</f:facet>
+							<h:outputText value="#{d.client.email}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Date</f:facet>
+							<h:outputText value="#{d.date}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Description</f:facet>
+							<h:outputText value="#{d.description}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Etat</f:facet>
+							<h:outputText
+								styleClass="#{d.etat=='ENCOURS' ? 'label label-warning' : d.etat=='TRAITE' ? 'label label-success' : 'label label-danger'}"
+								value="#{d.etat}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Montant Remboursement</f:facet>
+							<h:outputText value="#{d.tarif}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Refuser Sinistre</f:facet>
+
+							<h:commandButton styleClass="btn btn-primary btn-xs"
+								action="#{sinistreRedacBean.doRefuser()}" value="refuser"
+								disabled="#{d.etat=='ENCOURS' ? 'false' : 'true'}">
+
+							</h:commandButton>
+						</h:column>
+
+					</h:dataTable>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

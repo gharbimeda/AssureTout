@@ -292,6 +292,7 @@ public class ContratBean {
 		this.biensGarantie = new ArrayList<Bien>();
 		selectedSousniveaus = new ArrayList<Sousniveau>();
 		 e = new FinalGarantie();
+		 niveaus = new ArrayList<Niveau>();
 
 	}
 
@@ -337,14 +338,12 @@ public class ContratBean {
 	}
 
 	public void ajoutSousNiveau(SousGarantie s) {
-		nv.setId(1);
-		nv.setNom("Taux");
-		nv.setTauxPrime(2f);
-		nv.setTauxRisque(10f);
-		ss.setNiveau(nv);
+		
+		ss.setNiveau(niveauServices.findById(1));
 		ss.setSousGarantie(s);
 		selectedSousniveaus.add(ss);
 		sousniveaus.remove(ss);
+		niveaus.addAll(niveauServices.findAll());
 	}
 
 	/*
@@ -417,6 +416,24 @@ public class ContratBean {
 		calculPrix();
 		return "final?faces-redirect=true";
 	}
+	
+	
+	public String validerSousgarantieDevis() {
+
+		for (int i = 0; i < this.selectedSousniveaus.size(); i++) {
+			selectedSousniveaus.get(i)
+					.setNiveau(this.niveauServices.findById(selectedSousniveaus.get(i).getNiveau().getId()));
+
+		}
+		
+		e.setGarantie(garantie);
+		e.setBiens(biensGarantie);
+		e.setSousniveaus(selectedSousniveaus);
+		this.finalGaranties.add(e);
+		calculPrix();
+		return "devis?faces-redirect=true";
+	}
+	
 
 	public String ajoutergarantie() {
 
@@ -516,7 +533,7 @@ public class ContratBean {
 		}
 		init();
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-		context.redirect(context.getRequestContextPath() + "/client/index.xhtml");
+		context.redirect(context.getRequestContextPath() + "/pages/client/index.xhtml");
 
 	}
 

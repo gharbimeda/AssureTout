@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:f="http://java.sun.com/jstl/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/templateClient/templateClient.xhtml">
@@ -57,100 +57,44 @@
 		</div>
 	</ui:define>
 	<ui:define name="PageContent">
-	<h:form>
 		<div class="fullwidth-block greet-section">
 			<div class="container">
-				<h2 class="section-title">Détail des Sous Garanties de
+				<h2 class="section-title">Détail des Biens de
 					#{clientBean.typeGarantieActuel.nom}</h2>
-				<br /> <br />
-
 				<div>
-					<ui:repeat var="sg" value="#{clientBean.sousGaranties}">
+					<h:form>
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputText value="Nom" />
+							<p:inputText value="#{clientBean.typeBien.nom}" />
+							<br />
+							<p:commandButton action="#{clientBean.doAddTypeBien()}"
+								value="Ajout" ajax="false" />
+						</h:panelGrid>
+					</h:form>
+				</div>
+				<div>
+					<ui:repeat var="tb" value="#{clientBean.typesBiens}">
 						<div class="col-md-4 col-sm-6 wow fadeInDown animated"
 							data-wow-duration="1000ms" data-wow-delay="600ms"
 							style="visibility: visible; animation-duration: 1000ms; animation-delay: 600ms; animation-name: fadeInDown;"
 							title="Liste Types Biens">
 							<div class="feature-wrap">
-								
+								<h:form>
 									<i class="fa fa-money"></i>
 									<h3>
-										<a style="color: #334458">#{sg.nom}</a>
+										<a style="color: #334458">#{tb.nom}</a>
 									</h3>
-									<h4>#{sg.description}</h4>
-									<h4>#{sg.prix}</h4>
-									<p:commandButton action="#{contrat.ajoutSousNiveau(sg)}"
-										value="Ajouter" class="btn btn-info">
+									<p:commandButton action="#{clientBean.detailSousDevis()}"
+										value="Valider" class="btn btn-info">
 									</p:commandButton>
-								
+								</h:form>
 							</div>
 						</div>
 					</ui:repeat>
 				</div>
-
-<br></br>
-<br></br>
-                 
-             		<p:fieldset id="selectedCars" legend="Sous Garanties choisies"
-				style="width:600px;">
-				<p:outputPanel id="dropArea">
-					<h:outputText value="!!!AJOUTEZ VOS sous garanties!!!"
-						rendered="#{empty contrat.selectedSousniveaus}"
-						style="font-size:24px;" />
-						
-						<h:dataTable
-						styleClass="table table-striped table-bordered table-hover"
-						id="selectedCarsTable" var="selected"
-						value="#{contrat.selectedSousniveaus}"
-						rendered="#{not empty contrat.selectedSousniveaus}">
-
-						<h:column>
-							<f:facet name="header">Nom</f:facet>
-							<h:outputText value="#{selected.sousGarantie.nom}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Description</f:facet>
-							<h:outputText value="#{selected.sousGarantie.description}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Prix</f:facet>
-							<h:outputText value="#{selected.sousGarantie.prix}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Niveau</f:facet>
-							<p:selectOneMenu value="#{selected.niveau.id}">
-								<f:selectItems value="#{contrat.niveaus}" var="curr"
-									itemValue="#{curr.id}"
-									itemLabel="#{curr.tauxRisque}" />
-							</p:selectOneMenu>
-						</h:column>
-						<h:column>
-							<f:facet name="header">Annuler</f:facet>
-
-							<p:commandButton icon="fa fa-times"
-								value="remove" actionListener="#{contrat.removeSousgarantie(selected)}"
-								partialSubmit="true" class="btn btn-info">
-								<f:ajax execute="carForm" render="carForm" />
-							</p:commandButton>
-						</h:column>
-
-					</h:dataTable>
-						
-				</p:outputPanel>
-			</p:fieldset>
-
-
-
-			<div class="EmptyBox30"></div>
-			<div class="TexAlCenter">
-				<p:commandButton value="Valider" class="btn btn-info"
-					action="#{contrat.validerSousgarantie()}" />
-
-			</div>
-
-
+				<br /> <br />
 			</div>
 		</div>
-		</h:form>
 	</ui:define>
 </ui:composition>
 

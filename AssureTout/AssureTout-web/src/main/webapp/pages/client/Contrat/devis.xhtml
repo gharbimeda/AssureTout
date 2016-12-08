@@ -3,56 +3,69 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
-	<ui:define name="menuContent">
-		<div class="bottom-header">
-			<div class="container">
-				<div class="main-navigation">
-					<ul class="menu">
-						<li class="menu-item"><a
-							href="#{request.contextPath}/pages/client/Contrat/bien.xhtml">Ajouter
-								Contrat</a></li>
-						<li class="menu-item"><a href="insurance.html">Mes
-								informations</a></li>
-						<li class="menu-item"><a
-							href="#{request.contextPath}/pages/client/mesSinistre.xhtml">Suivre
-								mes sinistres</a></li>
-						<li class="menu-item"><a
-							href="#{request.contextPath}/pages/client/newSinistre.xhtml">Déclarer
-								un sinistre</a></li>
-						<li class="menu-item"><a
-							href="#{request.contextPath}/pages/client/contact.xhtml">Nous
-								contacter</a></li>
-						<li class="menu-item"><h:form>
-								<h:commandLink action="#{access.doLogout()}"
-									value="Se déconnecter" />
-							</h:form></li>
-					</ul>
-					<!-- .menu -->
-				</div>
-				<!-- .main-navigation -->
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/templates/templateClient/templateClient.xhtml">
 
+	<ui:define name="PageContent">
+	<hr />
+<h1 class="	TexAlCenter Bleu"> Devis </h1> 
+<hr/>
+<h:form id="carForm">
 
-				<div class="mobile-navigation"></div>
+<ui:repeat value="#{contrat.finalGaranties}" var="a">
+		<div class="Container100 Responsive100">
+			<div class="ContainerIndent">
+				<h2 class="BigTopic"></h2>
+				
+				<h2 class="section-title">#{a.garantie.nom}</h2>
+				
+					
+					
+					<p:commandButton  Class="btn btn-info" icon="fa fa-times"
+								action="#{contrat.removaFinal(a)}" value="Annuler">
+								<f:ajax execute="carForm" render="carForm" />
+								
+					</p:commandButton>
+							
+					
+							
+						<h:dataTable
+						styleClass="table table-striped table-bordered table-hover"
+						id="selectedCarsTable" var="s" value="#{a.sousniveaus}"
+						>
+
+						<h:column>
+							<f:facet name="header">Nom</f:facet>
+							<h:outputText value="#{s.sousGarantie.nom}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Niveau</f:facet>
+							<h:outputText value="#{s.niveau.nom}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Prix</f:facet>
+							<h:outputText value="#{s.sousGarantie.prix}" />
+						</h:column>
+                        </h:dataTable>
+							
+						
+							
+						
+				
 			</div>
 		</div>
-	</ui:define>
-	<ui:define name="content">
-
-		<div class="ContainerIndent">
-			<h2 class="BigTopic">Choisissez une garantie</h2>
-			<h:form>
-				<p:breadCrumb>
-					<p:menuitem value="Categories" url="#" />
-					<p:menuitem value="Créer votre contrat" />
-				</p:breadCrumb>
-			</h:form>
-		</div>
-		<hr />
-
-		<div class="EmptyBox30"></div>
-		<ui:include src="garanties.xhtml" />
-
+</ui:repeat>
+<hr />
+<h2 class="	Fleft"> &#160; Total :</h2> <h2 class="TexAlRight ">#{contrat.prix}</h2>
+<hr/>
+            <div class="TexAlCenter">
+			
+				<p:commandButton value="Enregistrer devis" class="btn btn-info"
+					  action="#{clientGarantiesBean.reinit()}">
+				<f:actionListener binding="#{contrat.souscrire()}"></f:actionListener>
+					
+					</p:commandButton>
+			</div>
+</h:form>
 
 	</ui:define>
 </ui:composition>
