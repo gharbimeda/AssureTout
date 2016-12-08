@@ -60,7 +60,7 @@ public class ContratBean {
 	tn.esprit.assuretout.contracts.ContratServices contratServices;
 	@EJB
 	tn.esprit.assuretout.contracts.GarantieServices garantieServices;
-	
+
 	private Bien bien;
 	private List<TypeGarantie> garanties;
 	private Contrat contrat;
@@ -81,12 +81,13 @@ public class ContratBean {
 	private List<FinalGarantie> finalGaranties;
 	private List<Niveau> niveaus;
 	private Float prix;
-	@ManagedProperty(value="#{identityBean.utilisateur}")
+	@ManagedProperty(value = "#{identityBean.utilisateur}")
 	private Client client;
 	private ContratBienGarantie contratBienGarentie;
 	private Date fin;
-	
-
+	private Sousniveau ss;
+	private Niveau nv;
+	private FinalGarantie e;
 
 	public Date getFin() {
 		return fin;
@@ -111,8 +112,6 @@ public class ContratBean {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-
-
 
 	public Float getPrix() {
 		return prix;
@@ -244,8 +243,6 @@ public class ContratBean {
 		this.typeBien = typeBien;
 	}
 
-	
-
 	public Contrat getContrat() {
 		return contrat;
 	}
@@ -281,6 +278,8 @@ public class ContratBean {
 	@PostConstruct
 	public void init() {
 		this.sousGaranties = new ArrayList<SousGarantie>();
+		ss = new Sousniveau();
+		nv = new Niveau();
 		this.selectedSousgarantie = new ArrayList<SousGarantie>();
 		this.setGarantie(services.findById(1));
 		this.setGaranties(services.findAll());
@@ -289,9 +288,11 @@ public class ContratBean {
 		this.setPrix((float) 0);
 		this.fin = new Date();
 		types = bienServices.findAll();
-		 bien = new Bien();
-		 this.biensGarantie = new ArrayList<Bien>();
-		 
+		bien = new Bien();
+		this.biensGarantie = new ArrayList<Bien>();
+		selectedSousniveaus = new ArrayList<Sousniveau>();
+		 e = new FinalGarantie();
+
 	}
 
 	public List<TypeBien> getTypes() {
@@ -328,17 +329,22 @@ public class ContratBean {
 
 	public String ajoutTypeBien(TypeBien typeBien) {
 		this.setTypeBien(typeBien);
-		this.setTypeProprietes(typeProprieteServices.findByBien(typeBien
-				.getId()));
+		this.setTypeProprietes(typeProprieteServices.findByBien(typeBien.getId()));
 		this.setProprietes(this.RemplirProp(typeProprietes));
-         
+
 		return "form?faces-redirect=true";
 
 	}
-	
-	public void ajoutSousNiveau(Sousniveau s) {
-		selectedSousniveaus.add(s);
-		sousniveaus.remove(s);
+
+	public void ajoutSousNiveau(SousGarantie s) {
+		nv.setId(1);
+		nv.setNom("Taux");
+		nv.setTauxPrime(2f);
+		nv.setTauxRisque(10f);
+		ss.setNiveau(nv);
+		ss.setSousGarantie(s);
+		selectedSousniveaus.add(ss);
+		sousniveaus.remove(ss);
 	}
 
 	/*
@@ -352,55 +358,58 @@ public class ContratBean {
 		bien.setProprietes(this.proprietes);
 		this.biensGarantie.add(bien);
 		this.setNiveaus(niveauServices.findAll());
-		sousniveaus= new ArrayList<Sousniveau>();
+		sousniveaus = new ArrayList<Sousniveau>();
 		this.setSousGaranties(sousGarantieServices.findByTypegarantie(this.garantie.getId()));
 		for (int i = 0; i < sousGaranties.size(); i++) {
 			Sousniveau e = new Sousniveau();
 			e.setSousGarantie(sousGaranties.get(i));
 			e.setNiveau(niveaus.get(0));
 			this.sousniveaus.add(e);
-			
+
 		}
 		this.selectedSousniveaus = new ArrayList<Sousniveau>();
 		return "sousgaranties?faces-redirect=true";
 	}
 
 	public String addAutreBien() {
-        
+
 		Bien bien = new Bien();
 		bien.setTypeBien(typeBien);
 		bien.setNom(typeBien.getNom());
 		bien.setProprietes(this.proprietes);
 		biensGarantie.add(bien);
-		
+
 		return "bien?faces-redirect=true";
 	}
-	 public void onCarDrop(DragDropEvent ddEvent) {
-	        Sousniveau s = ((Sousniveau) ddEvent.getData());
-	  
-	        selectedSousniveaus.add(s);
-	       
-	        sousniveaus.remove(s);
-	    }
-	 public void removeSousgarantie(Sousniveau s){
-		 
-		 selectedSousniveaus.remove(s);
-		 sousniveaus.add(s);
-		 
-	 }
-	 public void removeBien(Bien b){
-		 
-		 biensGarantie.remove(b);
-	 }
-	public String validerSousgarantie(){
-		
-		
-		
+
+	public void onCarDrop(DragDropEvent ddEvent) {
+		Sousniveau s = ((Sousniveau) ddEvent.getData());
+
+		selectedSousniveaus.add(s);
+
+		sousniveaus.remove(s);
+	}
+
+	public void removeSousgarantie(Sousniveau s) {
+
+		selectedSousniveaus.remove(s);
+		sousniveaus.add(s);
+
+	}
+
+	public void removeBien(Bien b) {
+
+		biensGarantie.remove(b);
+	}
+
+	public String validerSousgarantie() {
+
 		for (int i = 0; i < this.selectedSousniveaus.size(); i++) {
-		selectedSousniveaus.get(i).setNiveau(this.niveauServices.findById(selectedSousniveaus.get(i).getNiveau().getId()));
-			
+			selectedSousniveaus.get(i)
+					.setNiveau(this.niveauServices.findById(selectedSousniveaus.get(i).getNiveau().getId()));
+
 		}
-		FinalGarantie e = new FinalGarantie();
+		
 		e.setGarantie(garantie);
 		e.setBiens(biensGarantie);
 		e.setSousniveaus(selectedSousniveaus);
@@ -408,79 +417,82 @@ public class ContratBean {
 		calculPrix();
 		return "final?faces-redirect=true";
 	}
-	public String ajoutergarantie(){
-		
-		
-		
+
+	public String ajoutergarantie() {
+
 		for (int i = 0; i < this.selectedSousniveaus.size(); i++) {
-		selectedSousniveaus.get(i).setNiveau(this.niveauServices.findById(selectedSousniveaus.get(i).getNiveau().getId()));
-			
+			selectedSousniveaus.get(i)
+					.setNiveau(this.niveauServices.findById(selectedSousniveaus.get(i).getNiveau().getId()));
+
 		}
 		FinalGarantie e = new FinalGarantie();
-		
+
 		e.setGarantie(this.garantie);
 		e.setBiens(biensGarantie);
 		e.setSousniveaus(selectedSousniveaus);
 		this.finalGaranties.add(e);
 		return "devis?faces-redirect=true";
 	}
-	public void removaFinal(FinalGarantie f){
+
+	public void removaFinal(FinalGarantie f) {
 		this.finalGaranties.remove(f);
 		calculPrix();
-		
+
 	}
-	public void calculPrix(){
-		
+
+	public void calculPrix() {
+
 		float s = 0;
 		float t = 0;
-		String v ;
+		String v;
 		float valeur = 1;
 		for (int i = 0; i < finalGaranties.size(); i++) {
 			for (int j = 0; j < finalGaranties.get(i).getSousniveaus().size(); j++) {
-				s = s + (finalGaranties.get(i).getSousniveaus().get(j).getNiveau().getTauxPrime()* 
-						finalGaranties.get(i).getSousniveaus().get(j).getSousGarantie().getPrix())/100;	
+				s = s + (finalGaranties.get(i).getSousniveaus().get(j).getNiveau().getTauxPrime()
+						* finalGaranties.get(i).getSousniveaus().get(j).getSousGarantie().getPrix()) / 100;
 			}
 			for (int j = 0; j < finalGaranties.get(i).getBiens().size(); j++) {
 				for (int k = 0; k < finalGaranties.get(i).getBiens().get(j).getProprietes().size(); k++) {
-					
-				t = t +finalGaranties.get(i).getBiens().get(j).getProprietes().get(k).getTypePropriete().getCoeff();
-				if (finalGaranties.get(i).getBiens().get(j).getProprietes().get(k).getNom().endsWith("aleur")) {
-					v = finalGaranties.get(i).getBiens().get(j).getProprietes().get(k).getValeur();
-					valeur = Float.parseFloat(v);
+
+					t = t + finalGaranties.get(i).getBiens().get(j).getProprietes().get(k).getTypePropriete()
+							.getCoeff();
+					if (finalGaranties.get(i).getBiens().get(j).getProprietes().get(k).getNom().endsWith("aleur")) {
+						v = finalGaranties.get(i).getBiens().get(j).getProprietes().get(k).getValeur();
+						valeur = Float.parseFloat(v);
+					}
 				}
-				}
-				
+
 			}
 		}
-		this.setPrix(s + valeur*t );
+		this.setPrix(s + valeur * t);
 	}
-	public void souscrire() throws IOException{
+
+	public void souscrire() throws IOException {
 		ContratBienGarantie c = new ContratBienGarantie();
-		
-			Contrat contrat = new Contrat();
-			contrat.setClient(this.client);
 
-			contrat.setPrime(this.prix/12);
-			contrat.setEtat(false);
+		Contrat contrat = new Contrat();
+		contrat.setClient(this.client);
 
+		contrat.setPrime(this.prix / 12);
+		contrat.setEtat(false);
 
-			Date d = new Date();
-			contrat.setDate(d);
-			contrat.setDateFin(fin);
-			this.contratServices.addContrat(contrat);
-			c.setContrat(contrat);
-		
+		Date d = new Date();
+		contrat.setDate(d);
+		contrat.setDateFin(fin);
+		this.contratServices.addContrat(contrat);
+		c.setContrat(contrat);
+
 		for (int i = 0; i < finalGaranties.size(); i++) {
 			Garantie g = new Garantie();
 			g.setTypeGarantie(finalGaranties.get(i).getGarantie());
 			garantieServices.addGarantie(g);
-			
+
 			c.setGarantie(g);
 			for (int j = 0; j < finalGaranties.get(i).getBiens().size(); j++) {
-				
-				bienServices2.addBien(finalGaranties.get(i).getBiens().get(j),c);
-				//c.setBien(finalGaranties.get(i).getBiens().get(j));
-				//contratBienGarantieServices.addContratBienGarentie(c);
+
+				bienServices2.addBien(finalGaranties.get(i).getBiens().get(j), c);
+				// c.setBien(finalGaranties.get(i).getBiens().get(j));
+				// contratBienGarantieServices.addContratBienGarentie(c);
 				c = new ContratBienGarantie();
 				c.setContrat(contrat);
 				c.setGarantie(g);
@@ -489,9 +501,9 @@ public class ContratBean {
 					p = finalGaranties.get(i).getBiens().get(j).getProprietes().get(k);
 					p.setBien(finalGaranties.get(i).getBiens().get(j));
 					proprieteServices.addPropriete(p);
-					
+
 				}
-				
+
 			}
 			for (int j = 0; j < finalGaranties.get(i).getSousniveaus().size(); j++) {
 				GarantieSousGarantieNiveau cs = new GarantieSousGarantieNiveau();
@@ -499,25 +511,23 @@ public class ContratBean {
 				cs.setSousGarantie(finalGaranties.get(i).getSousniveaus().get(j).getSousGarantie());
 				cs.setNiveau(finalGaranties.get(i).getSousniveaus().get(j).getNiveau());
 				garantieSousGarantieNiveauServices.addGarantieSousGarantieNiveau(cs);
-				
+
 			}
 		}
 		init();
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 		context.redirect(context.getRequestContextPath() + "/client/index.xhtml");
-		
 
-		
 	}
-	public void ajouterGarantie(){
+
+	public void ajouterGarantie() {
 		ContratBienGarantie c = new ContratBienGarantie();
-		
-			
-			Contrat contrat = contratServices.findByClient(this.client.getId());
-			contrat.setPrime(contrat.getPrime() + prix/12);
-			contratServices.update(contrat);
-			c.setContrat(contrat);
-			
+
+		Contrat contrat = contratServices.findByClient(this.client.getId());
+		contrat.setPrime(contrat.getPrime() + prix / 12);
+		contratServices.update(contrat);
+		c.setContrat(contrat);
+
 		for (int i = 0; i < finalGaranties.size(); i++) {
 			Garantie g = new Garantie();
 			g.setTypeGarantie(finalGaranties.get(i).getGarantie());
@@ -528,14 +538,14 @@ public class ContratBean {
 				cs.setSousGarantie(finalGaranties.get(i).getSousniveaus().get(j).getSousGarantie());
 				cs.setNiveau(finalGaranties.get(i).getSousniveaus().get(j).getNiveau());
 				garantieSousGarantieNiveauServices.addGarantieSousGarantieNiveau(cs);
-				
+
 			}
 			c.setGarantie(g);
 			for (int j = 0; j < finalGaranties.get(i).getBiens().size(); j++) {
-				
-				bienServices2.addBien(finalGaranties.get(i).getBiens().get(j),c);
-				//c.setBien(finalGaranties.get(i).getBiens().get(j));
-				//contratBienGarantieServices.addContratBienGarentie(c);
+
+				bienServices2.addBien(finalGaranties.get(i).getBiens().get(j), c);
+				// c.setBien(finalGaranties.get(i).getBiens().get(j));
+				// contratBienGarantieServices.addContratBienGarentie(c);
 				c = new ContratBienGarantie();
 				c.setContrat(contrat);
 				c.setGarantie(g);
@@ -544,9 +554,9 @@ public class ContratBean {
 					p = finalGaranties.get(i).getBiens().get(j).getProprietes().get(k);
 					p.setBien(finalGaranties.get(i).getBiens().get(j));
 					proprieteServices.addPropriete(p);
-					
+
 				}
-				
+
 			}
 		}
 		init();
@@ -557,5 +567,31 @@ public class ContratBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
+
+	public Sousniveau getSs() {
+		return ss;
+	}
+
+	public Niveau getNv() {
+		return nv;
+	}
+
+	public void setSs(Sousniveau ss) {
+		this.ss = ss;
+	}
+
+	public void setNv(Niveau nv) {
+		this.nv = nv;
+	}
+
+	public FinalGarantie getE() {
+		return e;
+	}
+
+	public void setE(FinalGarantie e) {
+		this.e = e;
+	}
+	
 }

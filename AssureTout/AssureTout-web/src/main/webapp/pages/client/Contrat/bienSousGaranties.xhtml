@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/templateClient/templateClient.xhtml">
@@ -57,6 +57,7 @@
 		</div>
 	</ui:define>
 	<ui:define name="PageContent">
+	<h:form>
 		<div class="fullwidth-block greet-section">
 			<div class="container">
 				<h2 class="section-title">Détail des Sous Garanties de
@@ -70,24 +71,77 @@
 							style="visibility: visible; animation-duration: 1000ms; animation-delay: 600ms; animation-name: fadeInDown;"
 							title="Liste Types Biens">
 							<div class="feature-wrap">
-								<h:form>
+								
 									<i class="fa fa-money"></i>
 									<h3>
 										<a style="color: #334458">#{sg.nom}</a>
 									</h3>
 									<h4>#{sg.description}</h4>
 									<h4>#{sg.prix}</h4>
-									<p:commandButton action="#{clientBean.detailSous()}"
+									<p:commandButton action="#{contrat.ajoutSousNiveau(sg)}"
 										value="Ajouter" class="btn btn-info">
 									</p:commandButton>
-								</h:form>
+								
 							</div>
 						</div>
 					</ui:repeat>
 				</div>
 
+                 
+             		<p:fieldset id="selectedCars" legend="Sous Garanties choisies"
+				style="margin-top:20px">
+				<p:outputPanel id="dropArea">
+					<h:outputText value="!!!AJOUTEZ VOS sous garanties!!!"
+						rendered="#{empty contrat.selectedSousniveaus}"
+						style="font-size:24px;" />
+					<p:dataTable id="selectedCarsTable" var="selected"
+						value="#{contrat.selectedSousniveaus}"
+						rendered="#{not empty contrat.selectedSousniveaus}">
+						<p:column headerText="Nom">
+							<h:outputText value="#{selected.sousGarantie.nom}" />
+						</p:column>
+
+						<p:column headerText="Description">
+							<h:outputText value="#{selected.sousGarantie.description}" />
+						</p:column>
+
+						<p:column headerText="Prix" style="width:32px">
+							<h:outputText value="#{selected.sousGarantie.prix}" />
+						</p:column>
+
+						<p:column headerText="Niveau">
+
+							<p:selectOneMenu value="#{selected.niveau.id}">
+								<f:selectItems value="#{contrat.niveaus}" var="curr"
+									itemValue="#{curr.id}"
+									itemLabel="#{curr.nom}   #{curr.tauxRisque}%" />
+							</p:selectOneMenu>
+						</p:column>
+
+						<p:column style="width:32px">
+							<p:commandButton icon="fa fa-times"
+								value="remove" actionListener="#{contrat.removeSousgarantie(selected)}"
+								partialSubmit="true">
+								<f:ajax execute="carForm" render="carForm" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:outputPanel>
+			</p:fieldset>
+
+
+
+			<div class="EmptyBox30"></div>
+			<div class="TexAlCenter">
+				<p:commandButton value="Valider" styleClass="RaisedButton"
+					action="#{contrat.validerSousgarantie()}" />
+
+			</div>
+
+
 			</div>
 		</div>
+		</h:form>
 	</ui:define>
 </ui:composition>
 
