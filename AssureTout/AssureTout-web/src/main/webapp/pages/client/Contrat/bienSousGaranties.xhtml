@@ -59,21 +59,12 @@
 	<ui:define name="PageContent">
 		<div class="fullwidth-block greet-section">
 			<div class="container">
-				<h2 class="section-title">Détail des Biens de
+				<h2 class="section-title">Détail des Sous Garanties de
 					#{clientBean.typeGarantieActuel.nom}</h2>
+				<br /> <br />
+
 				<div>
-					<h:form>
-						<h:panelGrid columns="2" cellpadding="5">
-							<h:outputText value="Nom" />
-							<p:inputText value="#{clientBean.typeBien.nom}" />
-							<br />
-							<p:commandButton action="#{clientBean.doAddTypeBien()}"
-								value="Ajout" ajax="false" />
-						</h:panelGrid>
-					</h:form>
-				</div>
-				<div>
-					<ui:repeat var="tb" value="#{clientBean.typesBiens}">
+					<ui:repeat var="sg" value="#{clientBean.sousGaranties}">
 						<div class="col-md-4 col-sm-6 wow fadeInDown animated"
 							data-wow-duration="1000ms" data-wow-delay="600ms"
 							style="visibility: visible; animation-duration: 1000ms; animation-delay: 600ms; animation-name: fadeInDown;"
@@ -82,17 +73,19 @@
 								<h:form>
 									<i class="fa fa-money"></i>
 									<h3>
-										<a style="color: #334458">#{tb.nom}</a>
+										<a style="color: #334458">#{sg.nom}</a>
 									</h3>
+									<h4>#{sg.description}</h4>
+									<h4>#{sg.prix}</h4>
 									<p:commandButton action="#{clientBean.detailSous()}"
-										value="Valider" class="btn btn-info">
+										value="Ajouter" class="btn btn-info">
 									</p:commandButton>
 								</h:form>
 							</div>
 						</div>
 					</ui:repeat>
 				</div>
-				<br /> <br />
+
 			</div>
 		</div>
 	</ui:define>
