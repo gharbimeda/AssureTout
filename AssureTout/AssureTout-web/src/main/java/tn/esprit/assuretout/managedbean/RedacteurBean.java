@@ -8,6 +8,5 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class RedacteurBean {
 
-	@EJB
-	Contra
+	
 }

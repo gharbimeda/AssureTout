@@ -28,61 +28,109 @@
 		
 			<div class="container">
 				<h2 class="section-title text-left">INSCRIPTION</h2>
-				<h:form class="contact-form">
-					<div class="row">
-						<div class="col-md-12">
-							<h:outputText value="Nom" />
-							<h:inputText placeholder="Nom" value="#{auth.client.nom}" />
-						</div>
-						<div class="col-md-12">
-							<h:outputText value="Prénom" />
+		<h:form>
 
-							<h:inputText placeholder="Prenom" value="#{auth.client.prenom}" />
-						</div>
-						<div class="col-md-12">
-							<h:outputText value="Email" />
+			<div class=" DispBlock MarAuto MarTopPerc5 TexAlCenter">
+				<div class=" MarAuto WidAutoOnMobile">
+					<div class="Card ShadowEffect">
 
-							<h:inputText id="mail" placeholder="Email"
-								value="#{auth.client.email}" />
+						
+						<div class="Container50  Fs18" style="padding-top: 0.5em;">Nom
 						</div>
-						<div class="col-md-12">
-							<h:outputText value="Mot de passe" />
+						<div class=" Container50">
+							<p:inputText placeholder="Nom" value="#{auth.client.nom}"
+								styleClass="Wid80 TexAlCenter Fs18 " />
+						</div>
+												<div class="EmptyBox10"></div>
+						
+						<div class="Container50  Fs18" style="padding-top: 0.5em;">
+						Prenom
+						</div>
+						<div class="Container50">
+							<p:inputText placeholder="Prenom" value="#{auth.client.prenom}"
+								styleClass="Wid80 TexAlCenter Fs18 " />
+						</div>
+						<div class="EmptyBox10"></div>
+						<div class="Container50  Fs18" style="padding-top: 0.5em;">
+						Email
+						</div>
+						<div class=" Container50">
+							<p:inputText id="mail" placeholder="Email"
+								value="#{auth.client.email}"
+								styleClass="Wid80 TexAlCenter Fs18 " />
+						</div>
 
-							<p:password type="password" placeholder="Mot de passe"
+						<div class="EmptyBox10"></div>
+
+<div class="Container50  Fs18" style="padding-top: 0.5em;">
+						Mot de passe
+						</div>
+						<div class="Container50">
+							<p:inputText type="password" placeholder="Mot de passe"
+								styleClass="Wid80 TexAlCenter Fs18 "
 								value="#{auth.client.password}" />
 						</div>
-						<div class="col-md-12">
-							<h:outputText value="Adresse" />
-							<h:inputText placeholder="Adresse" value="#{auth.client.adresse}" />
+
+
+						<div class="EmptyBox10"></div>
+<div class="Container50  Fs18" style="padding-top: 0.5em;">
+						Adresse
 						</div>
-						<div class="col-md-12">
-							<h:outputText value="Région" />
-							<h:inputText placeholder="Region" value="#{auth.client.region}" />
+						<div class=" Container50">
+							<p:inputText placeholder="Adresse" value="#{auth.client.adresse}"
+								styleClass="Wid80 TexAlCenter Fs18 " />
 						</div>
-						<div class="col-md-12">
-							<h:outputText value="Télephone" />
-							<h:inputText placeholder="Telephone"
-								value="#{auth.client.telephone}" />
+												<div class="EmptyBox10"></div>
+						
+<div class="Container50  Fs18" style="padding-top: 0.5em;">
+						Region
 						</div>
-						<div class="col-md-12">
-							<h:outputText value="Date de naissance" />
-							<h:inputText  value="#{auth.client.dateNaissance}"></h:inputText>
+						<div class="Container50">
+							<p:inputText placeholder="Region" value="#{auth.client.region}"
+								styleClass="Wid80 TexAlCenter Fs18 " />
 						</div>
-						<div class="col-md-12">
-							<h:outputText value="Sexe" />
+						<div class="EmptyBox10"></div>
+
+						<div class="Container50  Fs18" style="padding-top: 0.5em;">Telephone</div>
+						<div class="Container50">
+							<p:inputText placeholder="Telephone"
+								value="#{auth.client.telephone}"
+								styleClass="Wid80 TexAlCenter Fs18 " />
+						</div>
+						<div class="EmptyBox10"></div>
+						<div class="Container50  Fs18" style="padding-top: 0.5em;">Date
+							de naissance</div>
+						<div class="Container50">
+							<p:calendar value="#{auth.client.dateNaissance}" id="popup"
+								styleClass="Wid100" />
+						</div>
+						<div class="EmptyBox10"></div>
+						<div class="Container50  Fs18" style="padding-top: 0.3em;">
+							&#160; Sexe</div>
+						<div class="Container50 " >
+
 							<p:selectOneRadio value="#{auth.client.sexe}">
 								<f:selectItem itemLabel="M" itemValue="M" />
 								<f:selectItem itemLabel="F" itemValue="F" />
 							</p:selectOneRadio>
 						</div>
 
+						<div class="EmptyBox20"></div>
 
-						<h:commandButton value="S'inscrire" 
-							action="#{auth.inscription()}">
-						</h:commandButton>
+						<div class="Wid100">
+
+							
+
+							<p:commandButton value="S'inscrire" icon="fa fa-sign-in"
+								styleClass="Wid30 Fs18 White RaisedButton"
+								action="#{auth.inscription()}">
+							</p:commandButton>
+						</div>
 					</div>
 
-				</h:form>
+				</div>
+			</div>
+		</h:form>
 			</div>
 		
 	</ui:define>
