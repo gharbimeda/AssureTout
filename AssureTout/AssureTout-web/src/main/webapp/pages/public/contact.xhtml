@@ -11,7 +11,9 @@
 			<div class="container">
 				<div class="main-navigation">
 					<ul class="menu">
-						<li class="menu-item"><a href="#{request.contextPath}/pages/public/contact.xhtml">Nous contacter</a></li>
+						<li class="menu-item"><a
+							href="#{request.contextPath}/pages/public/contact.xhtml">Nous
+								contacter</a></li>
 					</ul>
 				</div>
 				<div class="mobile-navigation"></div>
@@ -28,23 +30,27 @@
 		</div>
 	</ui:define>
 	<ui:define name="PageContent">
-		<div class="fullwidth-block greet-section">
+		<div class="page">
 			<div class="container">
-				<h2 class="section-title">Connectez vous</h2>
-				<h:form>
-					<h:panelGrid columns="2">
-						<h:outputText value="Entrez votre identifiant " />
-						<p:inputText value="#{access.login}" />
-						<h:outputText value="Entrez votre mot de passe " />
-						<p:password value="#{access.password}" />
+				<div class="map"></div>
 
-					</h:panelGrid>
-					<p:commandButton action="#{access.doLogin()}" value="Connection"
-						ajax="false" class="btn btn-info" />
-					<a href="#{request.contextPath}/pages/public/inscription.xhtml"> s'inscrire </a>
+				<div class="row">
+					<div class="col-md-3">
+						<h2 class="section-title text-left">Address</h2>
 
-				</h:form>
+						<div class="contact-detail">
+							<address>
+								<p>
+									Company Name INC. <br/> 523 Burt Street, Omaha
+								</p>
+
+								<p>Phone: +1 823 424 9134 info@company.com</p>
+							</address>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+
 	</ui:define>
 </ui:composition>
