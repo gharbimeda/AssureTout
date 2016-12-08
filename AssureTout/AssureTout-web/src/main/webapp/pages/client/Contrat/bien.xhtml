@@ -12,7 +12,7 @@
 				<div class="main-navigation">
 					<ul class="menu">
 						<li class="menu-item"><a
-							href="#{request.contextPath}/pages/client/Contrat/bien.xhtml">Ajouter
+							href="#{request.contextPath}/pages/client/Contrat/type.xhtml">Ajouter
 								Contrat</a></li>
 						<li class="menu-item"><a href="insurance.html">Mes
 								informations</a></li>
@@ -33,8 +33,6 @@
 					<!-- .menu -->
 				</div>
 				<!-- .main-navigation -->
-
-
 				<div class="mobile-navigation"></div>
 			</div>
 		</div>
@@ -61,38 +59,51 @@
 	<ui:define name="PageContent">
 		<div class="fullwidth-block greet-section">
 			<div class="container">
-				<h2 class="section-title">Ajouter un Bien</h2>
-
-				<div class="row">
-
-					<f:forEach items="#{contrat.types}" var="a">
-						<div class="col-md-3">
-							<div class="feature">
-								<h3 class="feature-title">#{a.nom}</h3>
-								<h2 class="feature-title">#{a.icone}</h2>
+				<h2 class="section-title">Détail de
+					#{clientBean.typeGarantieActuel.nom}</h2>
+				<div>
+					<ui:repeat var="tb" value="#{clientBean.typesBiens}">
+						<div class="col-md-4 col-sm-6 wow fadeInDown animated"
+							data-wow-duration="1000ms" data-wow-delay="600ms"
+							style="visibility: visible; animation-duration: 1000ms; animation-delay: 600ms; animation-name: fadeInDown;"
+							title="Liste Types Biens">
+							<div class="feature-wrap">
 								<h:form>
-
-
-									<p:commandButton value="Ajouter"
-										styleClass="BlueButton RaisedButton Animated03 changecolor PinkBack"
-										action="#{contrat.ajoutTypeBien(a)}" />
+									<i class="fa fa-money"></i>
+									<h3>
+										<a style="color: #334458">#{tb.nom}</a>
+									</h3>
+									<p:commandButton action="#{client.detailGarantie(t)}"
+										value="Ajouter" class="btn btn-info">
+									</p:commandButton>
 								</h:form>
 							</div>
 						</div>
-
-					</f:forEach>
+					</ui:repeat>
 				</div>
+				<br /> <br />
 
-
-
-
+				<h2>Sous Garanties</h2>
+				<div>
+					<ui:repeat var="sg" value="#{clientBean.sousGaranties}">
+						<div class="col-md-4 col-sm-6 wow fadeInDown animated"
+							data-wow-duration="1000ms" data-wow-delay="600ms"
+							style="visibility: visible; animation-duration: 1000ms; animation-delay: 600ms; animation-name: fadeInDown;"
+							title="Liste Types Biens">
+							<div class="feature-wrap">
+								<i class="fa fa-money"></i>
+								<h3>
+									<a style="color: #334458">#{sg.nom}</a>
+								</h3>
+								<h4>#{sg.description}</h4>
+								<h4>#{sg.prix}</h4>
+							</div>
+						</div>
+					</ui:repeat>
+				</div>
 
 			</div>
 		</div>
-
-
-
-
 	</ui:define>
 </ui:composition>
 

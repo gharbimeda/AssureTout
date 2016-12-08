@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:f="http://java.sun.com/jstl/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/templateClient/templateClient.xhtml">
@@ -11,7 +11,9 @@
 			<div class="container">
 				<div class="main-navigation">
 					<ul class="menu">
-						<li class="menu-item"><a href="#{request.contextPath}/pages/client/Contrat/type.xhtml">Ajouter Contrat</a></li>
+						<li class="menu-item"><a
+							href="#{request.contextPath}/pages/client/Contrat/type.xhtml">Ajouter
+								Contrat</a></li>
 						<li class="menu-item"><a href="insurance.html">Mes
 								informations</a></li>
 						<li class="menu-item"><a
@@ -20,7 +22,8 @@
 						<li class="menu-item"><a
 							href="#{request.contextPath}/pages/client/newSinistre.xhtml">Déclarer
 								un sinistre</a></li>
-						<li class="menu-item"><a href="#{request.contextPath}/pages/client/contact.xhtml">Nous
+						<li class="menu-item"><a
+							href="#{request.contextPath}/pages/client/contact.xhtml">Nous
 								contacter</a></li>
 						<li class="menu-item"><h:form>
 								<h:commandLink action="#{access.doLogout()}"
@@ -30,8 +33,6 @@
 					<!-- .menu -->
 				</div>
 				<!-- .main-navigation -->
-
-
 				<div class="mobile-navigation"></div>
 			</div>
 		</div>
@@ -58,42 +59,35 @@
 	<ui:define name="PageContent">
 		<div class="fullwidth-block greet-section">
 			<div class="container">
-				<h2 class="section-title">Bienvenue Chez Assure Tout</h2>
-
-				<div class="row">
-					<div class="col-md-3">
-						<div class="feature">
-							<i class="icon-car"></i>
-							<h3 class="feature-title">Garantie Auto</h3>
-							<p>Accidents, vols, bris de glace.... Ne craignez plus rien
-								avec Assure Tout</p>
+				<h2 class="section-title">Ajouter une Garantie</h2>
+				<ui:repeat var="t" value="#{clientBean.typeGaranties}">
+					<div class="col-md-4 col-sm-6 wow fadeInDown animated"
+						data-wow-duration="1000ms" data-wow-delay="600ms"
+						style="visibility: visible; animation-duration: 1000ms; animation-delay: 600ms; animation-name: fadeInDown;"
+						title="Liste Types Garantie">
+						<div class="feature-wrap">
+							<h:form>
+								<i class="fa fa-money"></i>
+								<h3>
+									<a style="color: #334458">#{t.nom}</a>
+								</h3>
+								<h4>#{t.description}</h4>
+								<p:commandButton action="#{clientBean.detailGarantie(t)}"
+									value="Ajouter" class="btn btn-info">
+								</p:commandButton>
+							</h:form>
 						</div>
 					</div>
-					<div class="col-md-3">
-						<div class="feature">
-							<i class="icon-sofa"></i>
-							<h3 class="feature-title">Garantie Habitation</h3>
-							<p>Maisons, Batiments, Atelier Assure Tout assure tout vos
-								immobiliers</p>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="feature">
-							<i class="icon-pool"></i>
-							<h3 class="feature-title">Garantie Prévoyance</h3>
-							<p>Assurer vous pour garantir une retraite royale</p>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="feature">
-							<i class="icon-nurse"></i>
-							<h3 class="feature-title">Garantie Santé</h3>
-							<p>Assurez vous contre tout ce qui menace votre santé</p>
-						</div>
-					</div>
-				</div>
-
+				</ui:repeat>
 			</div>
 		</div>
 	</ui:define>
 </ui:composition>
+
+
+
+
+
+
+
+
